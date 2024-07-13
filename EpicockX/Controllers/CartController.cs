@@ -42,8 +42,14 @@ namespace EpicockX.Controllers
             var cart = _cartSvc.GetCart();
             var userId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var orderId = _cartSvc.SubmitOrder(order, userId, cart);
-            var lastOrder = _cartSvc.GetResultOrder(orderId, userId);
-            return RedirectToAction("Result", lastOrder);
+
+
+
+
+
+            //var lastOrder = _cartSvc.GetResultOrder(orderId, userId);
+            return Ok();
+            //RedirectToAction("Result", lastOrder);
         }
 
         public IActionResult Result()
