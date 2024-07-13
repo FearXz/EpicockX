@@ -51,6 +51,7 @@ namespace EpicockX.Controllers
             {
                 SuccessUrl = domain + "Cart/Success?session_id={CHECKOUT_SESSION_ID}",
                 CancelUrl = domain + "Cart/Fail",
+                PaymentMethodTypes = new List<string> { "card", "paypal" },
                 LineItems = new List<SessionLineItemOptions>(),
                 Mode = "payment",
             };
