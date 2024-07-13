@@ -90,10 +90,10 @@ namespace EpicockX.Controllers
             //RedirectToAction("Result", lastOrder);
         }
 
-        public IActionResult Result()
+        public IActionResult Result(int orderId, int userId)
         {
-            //var order = _cartSvc.
-            return View();
+            var resultOrder = _cartSvc.GetResultOrder(orderId, userId);
+            return View(resultOrder);
         }
 
         public IActionResult AddToCart(int id, string returnUrl)

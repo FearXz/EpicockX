@@ -1,4 +1,4 @@
-﻿@model EpicockX.Models.OrderGetDto
+﻿@model EpicockX.Models.ResultOrderDto
 
 @{
     ViewData["Title"] = "Result";
@@ -7,50 +7,26 @@
 <h1>Result</h1>
 
 <div>
-    <h4>OrderGetDto</h4>
+    <h4>ResultOrderDto</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.OrderId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.OrderId)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Surname)
+            @Html.DisplayNameFor(model => model.ProductName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Surname)
+            @Html.DisplayFor(model => model.ProductName)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayNameFor(model => model.Quantity)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.City)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ZipCode)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ZipCode)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Country)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Country)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserId)
+            @Html.DisplayFor(model => model.Quantity)
         </dd>
     </dl>
 </div>
