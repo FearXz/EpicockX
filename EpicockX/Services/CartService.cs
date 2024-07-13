@@ -118,28 +118,36 @@ namespace EpicockX.Services
                 )
                 {
                     conn.Open();
-                    const string SELECT_ALL_COMMAND =
-                        "SELECT Orders.OrderId"
-                        + "STRING_AGG(CONCAT(OrderProducts.Quantity, 'x ', Products.ProductName, ''), ', ')"
-                        + "FROM Orders"
-                        + "JOIN OrderProducts ON Orders.OrderId = OrderProducts.OrderId"
-                        + "JOIN Products ON OrderProducts.ProductId = Products.ProductId"
-                        + "WHERE Orders.UserId = 1 AND Orders.OrderId = 5"
-                        + "GROUP BY Orders.OrderId";
-                    using (SqlCommand cmd = new SqlCommand(SELECT_ALL_COMMAND, conn))
+                    using (var transaction = conn.BeginTransaction())
                     {
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        try
                         {
-                            while (reader.Read())
+                            const string SELECT_ALL_COMMAND =
+                            "SELECT Orders.OrderId"
+                            + "STRING_AGG(CONCAT(OrderProducts.Quantity, 'x ', Products.ProductName, ''), ', ')"
+                            + "FROM Orders"
+                            + "JOIN OrderProducts ON Orders.OrderId = OrderProducts.OrderId"
+                            + "JOIN Products ON OrderProducts.ProductId = Products.ProductId"
+                            + "WHERE Orders.UserId = @userId AND Orders.OrderId = @orderId"
+                            + "GROUP BY Orders.OrderId";
+                            using (SqlCommand cmd = new SqlCommand(SELECT_ALL_COMMAND, conn))
                             {
-                                CartProduct order = new CartProduct();
-                                order.ProductName = reader.GetString(0);
-                                order.ProductDescription = reader.GetString(1);
-                                order.Quantity = reader.GetInt32(2);
-                                order.ProductPrice = reader.GetInt32(3);
-                                order.ProductCategory = reader.GetString(4);
-                                order.ProductBrand = reader.GetString(5);
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        resultOrder.OrderId = reader.GetInt32(0);
+                                        resultOrder.ProductName = reader.GetString(1);
+                                        resultOrder.Quantity = reader.GetString(2);                                       
+                                    }
+                                }
                             }
+                            transaction.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            throw new Exception("Errore nell'inserimento dell'ordine", ex);
                         }
                     }
                 }
@@ -147,8 +155,8 @@ namespace EpicockX.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("Errore nel recupero della lista degli ordini", ex);
+                throw new Exception("Errore nell'aggiunta del prodotto", ex);
             }
         }
-    }
+    }   
 }
