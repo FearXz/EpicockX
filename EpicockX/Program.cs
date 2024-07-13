@@ -12,7 +12,6 @@ builder.Services.AddHttpContextAccessor();
 
 builder
     .Services.AddScoped<ImageService>()
-    .AddScoped<OrderService>()
     .AddScoped<ProductService>()
     .AddScoped<AuthService>()
     .AddScoped<CartService>()

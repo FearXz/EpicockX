@@ -105,5 +105,44 @@ namespace EpicockX.Services
                 throw new Exception("Errore nell'aggiunta del prodotto", ex);
             }
         }
+
+        public ResultOrderDto GetResultOrder(int orderId, int userId)
+        {
+            ResultOrderDto resultOrder = new ResultOrderDto();
+            try
+            {
+                using (
+                    SqlConnection conn = new SqlConnection(
+                        _config.GetConnectionString("DefaultConnection")
+                    )
+                )
+                {
+                    conn.Open();
+                    const string SELECT_ALL_COMMAND =
+                        "SELECT\nOrders.OrderId AS \"Numero Ordine\",\nSTRING_AGG(CONCAT(OrderProducts.Quantity, 'x ', Products.ProductName, ''), ', ') AS \"Prodotti\"\nFROM\nOrders\nJOIN\nOrderProducts ON Orders.OrderId = OrderProducts.OrderId\nJOIN\nProducts ON OrderProducts.ProductId = Products.ProductId\nWHERE\nOrders.UserId = @userId\nGROUP BY\nOrders.OrderID";
+                    using (SqlCommand cmd = new SqlCommand(SELECT_ALL_COMMAND, conn))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                CartProduct order = new CartProduct();
+                                order.ProductName = reader.GetString(0);
+                                order.ProductDescription = reader.GetString(1);
+                                order.Quantity = reader.GetInt32(2);
+                                order.ProductPrice = reader.GetInt32(3);
+                                order.ProductCategory = reader.GetString(4);
+                                order.ProductBrand = reader.GetString(5);
+                            }
+                        }
+                    }
+                }
+                return resultOrder;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Errore nel recupero della lista degli ordini", ex);
+            }
+        }
     }
 }
