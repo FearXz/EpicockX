@@ -9,5 +9,6 @@
         public decimal ProductPrice { get; set; }
         public string ProductCategory { get; set; }
         public string ProductBrand { get; set; }
+
     }
 }

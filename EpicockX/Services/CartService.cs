@@ -54,8 +54,8 @@ namespace EpicockX.Services
                         try
                         {
                             const string INSERT_COMMAND =
-                                "INSERT INTO Orders (Name, Surname, Address, City, ZipCode, Country, UserId)"
-                                + " VALUES (@Name, @Surname, @Address, @City, @ZipCode, @Country, @UserId)"
+                                "INSERT INTO Orders (Name, Surname, Address, City, ZipCode, Country, UserId, SessionId)"
+                                + " VALUES (@Name, @Surname, @Address, @City, @ZipCode, @Country, @UserId, @SessionId)"
                                 + " SELECT SCOPE_IDENTITY()";
                             using (
                                 SqlCommand cmd = new SqlCommand(INSERT_COMMAND, conn, transaction)
@@ -68,6 +68,7 @@ namespace EpicockX.Services
                                 cmd.Parameters.AddWithValue("@ZipCode", order.ZipCode);
                                 cmd.Parameters.AddWithValue("@Country", order.Country);
                                 cmd.Parameters.AddWithValue("@UserId", userId);
+                                cmd.Parameters.AddWithValue("@SessionId", order.SessionId);
                                 OrderId = Convert.ToInt32(cmd.ExecuteScalar());
                             }
 

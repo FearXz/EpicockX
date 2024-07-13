@@ -1,5 +1,6 @@
 using EpicockX.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,7 @@ builder.Services.AddHttpContextAccessor();
 
 builder
     .Services.AddScoped<ImageService>()
-    .AddScoped<ProductService>()
+    .AddScoped<EpicockX.Services.ProductService>()
     .AddScoped<AuthService>()
     .AddScoped<CartService>()
     .AddScoped<UserService>();
@@ -39,6 +40,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe")["secretKey"];
 
 app.UseAuthorization();
 
