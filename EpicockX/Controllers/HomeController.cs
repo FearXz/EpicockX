@@ -9,19 +9,16 @@ namespace EpicockX.Controllers
     {
         private readonly ProductService _productSvc;
         private readonly ImageService _imageSvc;
-        private readonly OrderService _orderSvc;
         private readonly CartService _cartSvc;
 
         public HomeController(
             ProductService productService,
             ImageService imageService,
-            OrderService orderService,
             CartService cartSVC
         )
         {
             _productSvc = productService;
             _imageSvc = imageService;
-            _orderSvc = orderService;
             _cartSvc = cartSVC;
         }
 

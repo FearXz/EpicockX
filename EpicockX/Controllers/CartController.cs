@@ -9,13 +9,11 @@ namespace EpicockX.Controllers
     {
         private readonly ProductService _productSvc;
         private readonly CartService _cartSvc;
-        private readonly OrderService _orderSvc;
 
-        public CartController(ProductService produtctSvc, CartService cartSvc, OrderService orderSvc)
+        public CartController(ProductService produtctSvc, CartService cartSvc)
         {
             _productSvc = produtctSvc;
             _cartSvc = cartSvc;
-            _orderSvc = orderSvc;
         }
 
         public IActionResult Index()
@@ -44,7 +42,7 @@ namespace EpicockX.Controllers
             var cart = _cartSvc.GetCart();
             var userId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var orderId = _cartSvc.SubmitOrder(order, userId, cart);
-            var lastOrder = _orderSvc.GetResultOrder(orderId, userId);
+            var lastOrder = _cartSvc.GetResultOrder(orderId, userId);
             return RedirectToAction("Result", lastOrder);
         }
 
