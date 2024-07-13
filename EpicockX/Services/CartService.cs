@@ -1,6 +1,7 @@
 ﻿using EpicockX.Models;
 using Microsoft.Data.SqlClient;
 using Newtonsoft.Json;
+using Stripe.Checkout;
 
 namespace EpicockX.Services
 {
@@ -13,6 +14,44 @@ namespace EpicockX.Services
         {
             _http = httpContextAccessor;
             _config = config;
+        }
+
+        public Session CreateCheckoutSession(List<Product> cart)
+        {
+            var domain = "https://localhost:7231/";
+
+            var Options = new SessionCreateOptions
+            {
+                SuccessUrl = domain + "Cart/Success?session_id={CHECKOUT_SESSION_ID}",
+                CancelUrl = domain + "Cart/Fail",
+                PaymentMethodTypes = new List<string> { "card", "paypal" },
+                LineItems = new List<SessionLineItemOptions>(),
+                Mode = "payment",
+            };
+
+            foreach (var item in cart)
+            {
+                var sessionLineItem = new SessionLineItemOptions
+                {
+                    PriceData = new SessionLineItemPriceDataOptions
+                    {
+                        UnitAmount = (long)item.ProductPrice * 100,
+                        Currency = "eur",
+                        ProductData = new SessionLineItemPriceDataProductDataOptions
+                        {
+                            Name = item.ProductName,
+                            Description = item.ProductDescription,
+                        }
+                    },
+                    Quantity = 1
+                };
+                Options.LineItems.Add(sessionLineItem);
+            }
+            // creo la sessione di Stripe e la invio al client
+            var service = new SessionService();
+            Session session = service.Create(Options);
+
+            return session;
         }
 
         public List<Product> GetCart()
@@ -139,7 +178,7 @@ namespace EpicockX.Services
                                     {
                                         resultOrder.OrderId = reader.GetInt32(0);
                                         resultOrder.ProductName = reader.GetString(1);
-                                        resultOrder.Quantity = reader.GetString(2);                                       
+                                        resultOrder.Quantity = reader.GetString(2);
                                     }
                                 }
                             }
@@ -159,5 +198,5 @@ namespace EpicockX.Services
                 throw new Exception("Errore nell'aggiunta del prodotto", ex);
             }
         }
-    }   
+    }
 }

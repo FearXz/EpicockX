@@ -1,7 +1,6 @@
 ﻿using EpicockX.Models;
 using EpicockX.Services;
 using Microsoft.AspNetCore.Mvc;
-using Stripe.Checkout;
 using System.Security.Claims;
 
 namespace EpicockX.Controllers
@@ -43,52 +42,13 @@ namespace EpicockX.Controllers
             var cart = _cartSvc.GetCart();
             var userId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-
-
-            var domain = "https://localhost:7231/";
-
-            var Options = new SessionCreateOptions
-            {
-                SuccessUrl = domain + "Cart/Success?session_id={CHECKOUT_SESSION_ID}",
-                CancelUrl = domain + "Cart/Fail",
-                PaymentMethodTypes = new List<string> { "card", "paypal" },
-                LineItems = new List<SessionLineItemOptions>(),
-                Mode = "payment",
-            };
-
-            foreach (var item in cart)
-            {
-                var sessionLineItem = new SessionLineItemOptions
-                {
-                    PriceData = new SessionLineItemPriceDataOptions
-                    {
-                        UnitAmount = (long)item.ProductPrice * 100,
-                        Currency = "eur",
-                        ProductData = new SessionLineItemPriceDataProductDataOptions
-                        {
-                            Name = item.ProductName,
-                            Description = item.ProductDescription,
-                        }
-                    },
-                    Quantity = 1
-                };
-                Options.LineItems.Add(sessionLineItem);
-            }
-            // creo la sessione di Stripe e la invio al client
-            var service = new SessionService();
-            Session session = service.Create(Options);
-
+            var session = _cartSvc.CreateCheckoutSession(cart);
             order.SessionId = session.Id;
             var orderId = _cartSvc.SubmitOrder(order, userId, cart);
 
             Response.Headers.Add("Location", session.Url);
 
             return Redirect(session.Url);
-
-
-
-            //var lastOrder = _cartSvc.GetResultOrder(orderId, userId);
-            //RedirectToAction("Result", lastOrder);
         }
 
         public IActionResult Result(int orderId, int userId)
@@ -127,6 +87,11 @@ namespace EpicockX.Controllers
             {
                 return Redirect(returnUrl);
             }
+            return View();
+        }
+
+        public IActionResult Success(string SessionId)
+        {
             return View();
         }
     }
