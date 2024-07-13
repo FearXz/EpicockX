@@ -119,7 +119,13 @@ namespace EpicockX.Services
                 {
                     conn.Open();
                     const string SELECT_ALL_COMMAND =
-                        "SELECT\nOrders.OrderId AS \"Numero Ordine\",\nSTRING_AGG(CONCAT(OrderProducts.Quantity, 'x ', Products.ProductName, ''), ', ') AS \"Prodotti\"\nFROM\nOrders\nJOIN\nOrderProducts ON Orders.OrderId = OrderProducts.OrderId\nJOIN\nProducts ON OrderProducts.ProductId = Products.ProductId\nWHERE\nOrders.UserId = @userId\nGROUP BY\nOrders.OrderID";
+                        "SELECT Orders.OrderId"
+                        + "STRING_AGG(CONCAT(OrderProducts.Quantity, 'x ', Products.ProductName, ''), ', ')"
+                        + "FROM Orders"
+                        + "JOIN OrderProducts ON Orders.OrderId = OrderProducts.OrderId"
+                        + "JOIN Products ON OrderProducts.ProductId = Products.ProductId"
+                        + "WHERE Orders.UserId = 1 AND Orders.OrderId = 5"
+                        + "GROUP BY Orders.OrderId";
                     using (SqlCommand cmd = new SqlCommand(SELECT_ALL_COMMAND, conn))
                     {
                         using (SqlDataReader reader = cmd.ExecuteReader())
