@@ -50,7 +50,7 @@ namespace EpicockX.Controllers
 
         public IActionResult Result()
         {
-            var order = _cartSvc.
+            //var order = _cartSvc.
             return View();
         }
 
