@@ -1,0 +1,76 @@
+﻿﻿@using EpicockX.Models;
+@model IEnumerable<EpicockX.Models.Product>
+@{
+    ViewData["Title"] = "Catalog";
+    var images = (IEnumerable<EpicockX.Models.ProductImage>)ViewBag.Images;
+}
+<style>
+    .mainColor {
+        background-color: #1D1E22;
+    }
+</style>
+
+<div class="flex mainColor text-white border-r border-2 border-black">
+
+    <aside class="w-1/4 p-4 border-r-2 border-black m-0">
+        <h2 class="font-bold text-lg mb-4">Sex Toys for Women</h2>
+        <ul class="mb-8">
+            <li><a href="@Url.Action("Catalog", new { category = "all" })" class="block py-2">View all products</a></li>
+            <li><a href="@Url.Action("Catalog", new { category = "ForHer" })" class="block py-2">View products for Her</a></li>
+            <li><a href="@Url.Action("Catalog", new { category = "ForHim" })" class="block py-2">View products for Him</a></li>
+            <li><a href="@Url.Action("Catalog", new { category = "ForBoth" })" class="block py-2">View products for Both</a></li>
+        </ul>
+    </aside>
+
+
+    <!-- Sezione principale per i prodotti -->
+    <main class="w-3/4 p-4 bg-dark">
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-3xl font-bold">I nostri Sex Toys</h1>
+            <div>
+                <span class="text-sm">@Model.Count() results</span>
+                <select class="ml-4 p-2 border text-black">
+                    <option value="asc">Order by: Ascending</option>
+                    <option value="desc">Order by: Descending</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 relative">
+            @foreach (var product in Model)
+            {
+                <div class="product_card relative">
+                    @foreach (var image in images.Where(img => img.ProductId == product.ProductId))
+                    {
+                        <img src="@image.ProductImageUrl" class="w-full h-48 object-cover mb-4">
+                    }
+                    <h2 class="text-xl font-semibold mb-2">@product.ProductName</h2>
+                    <p class="text-white-700 mb-2">@product.ProductDescription</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <p class="text-white-900 font-bold">€@product.ProductPrice</p>
+                    </div>
+
+                    <button class="button mt-auto w-full absolute bottom-0 left-0">
+                        <span class="button-content no-wrap">
+                            <a href="@Url.Action("Details", new { id = product.ProductId })" class="text-white block text-center">
+                                Visualizza Dettagli
+                            </a>
+                        </span>
+                    </button>
+                </div>
+            }
+        </div>
+    </main>
+
+</div>
+
+@section Scripts
+{
+    <script src="./lib/tailwindcss/tailwind.css"></script>
+
+
+
+   
+
+
+}

@@ -1,0 +1,28 @@
+﻿@model Page404Dto
+@{
+    ViewData["Title"] = "Error";
+}
+
+
+<div class="not_found grid grid-cols-1 md:grid-cols-2 min-h-screen bg-black-900 text-black">
+    <div class="relative flex justify-center items-center h-screen">
+        <img src="/assets/images/404/404-desk.jpg" alt="404 Image" class="w-full h-full object-cover">
+    </div>
+    <div class="flex flex-col justify-center items-center text-center p-6">
+        <h1 class="text-5xl font-bold mb-4">Non riesci a trovare il punto giusto?</h1>
+        <p class="text-lg mb-6">
+            Siamo spiacenti, ma la pagina che stai cercando non esiste. Potrebbe essere stata rimossa, aver cambiato nome o non essere disponibile temporaneamente.
+        </p>
+        <p class="text-lg font-medium mb-2 mt-5 fs-2">Riproviamo, dai!</p>
+        <a href="/" class="right-nip custom-position">
+            <div class="outer circle">
+                <div class="inner circle"></div>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="./lib/tailwindcss/tailwind.css"></script>
+}

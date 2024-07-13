@@ -1,6 +1,5 @@
-﻿using EpicockX.Models;
-
-namespace EpicockX.ViewModels
+﻿
+namespace EpicockX.Models
 {
     public class BackOfficeIndexViewModel
     {

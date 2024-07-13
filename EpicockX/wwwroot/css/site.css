@@ -19,4 +19,281 @@ html {
 
 body {
   margin-bottom: 60px;
+  margin-bottom: 0;
 }
+
+h1{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.MainColor {
+    background-color: #1D1E22;
+}
+
+/*----------------------ABOUT US--------------------*/
+
+.MainColor_AboutUs {
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background-image: url('../assets/images/banner_AboutUs/wallpaper_02.jpg');
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); 
+    z-index: 1;
+}
+
+.content-wrapper {
+    width: 100%;
+    margin: 0;
+    padding: 6rem 1.5rem;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: #ffffff; 
+}
+
+.about-section, .features-section, .call-to-action-section {
+    text-align: center;
+    width: 100%;
+    margin: 0 auto; 
+}
+
+.about-section {
+    font-size: 2rem;
+}
+
+    .about-section p, .features-section p, .call-to-action-section p {
+        font-size: 1.2rem; 
+    }
+
+h1 {
+    font-size: 4rem; 
+    font-weight: 700; 
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: 600; 
+}
+
+.call-to-action-section a {
+    margin: 0.5rem;
+    padding: 1rem 2rem;
+    background-color: #e53e3e;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 0.375rem;
+    display: inline-block;
+    font-size: 1.25rem; 
+}
+
+    .call-to-action-section a:hover {
+        background-color: #c53030; 
+    }
+
+@media (max-width: 768px) {
+    .MainColor_AboutUs {
+        padding-top: 6rem;
+    }
+}
+
+/*----------------------Page404--------------------*/
+
+
+.right-nip {
+    margin: 6em 18em;
+}
+
+.circle {
+    border-radius: 50px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+}
+
+.outer {
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(#CC8877, #BB6644);
+    display: flex;
+    justify-content: center;
+    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
+}
+
+.inner {
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(#884433, #995544, #CC8877);
+    align-self: center;
+    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.custom-position {
+    margin-top: 3em;
+}
+
+
+/*----------------------Carello--------------------*/
+
+#cartModal {
+    height: 0vh;
+    display: none;
+}
+
+    #cartModal.active {
+        display: flex;
+    }
+
+
+#colCartNav {
+    margin-left: 10em;
+    height: 10vh;
+    width: 50vh;
+    background-image: url(../assets/images/banner_AboutUs/wallpaper_01.jpg);
+}
+
+    #colCartNav img {
+        height: 2rem;
+        width: 2rem;
+    }
+
+#colCartFot {
+    width: 50vh;
+    background-image: url(../assets/images/banner/footer.jpg);
+    height: 90vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 20px;
+    margin-left: 10em;
+}
+
+.rounded-lg {
+    border-radius: 5rem;
+}
+
+.rounded-t-lg {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+#BtnCart {
+    background-color: #bf9a5c;
+    
+}
+
+/*----------------------Catalog--------------------*/
+
+.product_card {
+    border: 2px solid black; 
+    padding: 1rem; 
+    border-radius: 0.5rem; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    position: relative; 
+}
+
+.discount-badge {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: #e53e3e;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.button {
+    position: relative;
+    overflow: hidden;
+    height: 3rem;
+    padding: 0 2rem;
+    border-radius: 1.5rem;
+    background: #1D1E22;
+    background-size: 400%;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+    .button:hover::before {
+        transform: scaleX(1);
+    }
+
+.button-content {
+    position: relative;
+    z-index: 1;
+    white-space: nowrap; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    width: 100%;
+    height: inherit;
+    border-radius: inherit;
+    background: #644022;
+    transition: all 0.475s;
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+/*------------------------------------------*/
+#promoModal.active {
+    display: flex;
+}
+
+#alert {
+    
+    background-color: #bf9a5c;
+    color: white;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+
+
+}
+
+#scontoHd {
+    color: white;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    background-color: #bf9a5c;
+}
+
+#video {
+    background-color : black; 
+    margin-bottom: -23px;
+}
+

@@ -1,0 +1,186 @@
+﻿.bgIndex {
+    background-image: url(../assets/images/banner/SfondoIndex.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+/* Card Index */
+
+.card {
+    width: 350px;
+    height: 380px;
+    background: #AF894A;
+    transition: all 0.4s;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.705);
+    font-size: 30px;
+    font-weight: 900;
+}
+
+    .card:hover {
+        border-radius: 15px;
+        cursor: pointer;
+        box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.705);
+        background: #AF894A;
+    }
+
+.first-content {
+    height: 100%;
+    width: 100%;
+    transition: all 0.4s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    border-radius: 15px;
+}
+
+.card:hover .first-content {
+    height: 0px;
+    opacity: 0;
+}
+
+.second-content {
+    height: 0%;
+    width: 100%;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    transition: all 0.4s;
+    font-size: 0px;
+    transform: rotate(90deg) scale(-1);
+}
+
+.card:hover .second-content {
+    opacity: 1;
+    height: 100%;
+    font-size: 1.8rem;
+    transform: rotate(0deg);
+}
+
+
+/* uallera10 */
+
+
+.shape {
+    --BG-COLOR: #F6DB92; 
+    --OUTLINE-COLOR: #1D1E22; 
+    --OUTLINE-SIZE: 15px;
+    width: 7rem;
+    aspect-ratio: 1;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    outline: var(--OUTLINE-SIZE) solid var(--OUTLINE-COLOR);
+    background: var(--BG-COLOR);
+    box-shadow: 0px 0px calc(var(--OUTLINE-SIZE) + 25px) rgba(0, 0, 0, 0.438);
+    animation: morph 5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+.numRowContainer {
+    height: fit-content;
+    animation: infiniteScroll 5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+@keyframes infiniteScroll {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(0, -50%);
+    }
+}
+
+@keyframes morph {
+    50% {
+        --BG-COLOR: #1D1E22; 
+        --OUTLINE-COLOR: --BG-COLOR: #F6DB92; 
+        transform: rotate(150deg);
+        border-radius: 20%;
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.bgAchievement {
+    background-color: #1D1A1C;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; 
+    height: 0;
+    overflow: hidden;
+}
+
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+.img-scale {
+    transition: transform 0.3s ease;
+}
+
+    .img-scale.in-viewport {
+        transform: scale(1.1);
+    }
+
+.loading {
+    width: 90px;
+    height: 90px;
+    perspective: 1000px;
+    border-radius: 50%;
+    
+}
+
+.side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    border-radius: 50%; 
+}
+
+.front {
+    background-color: black;
+}
+
+.back {
+    background-color: red; 
+    transform: rotateY(180deg);
+}
+
+@keyframes rotateYContinuous {
+    from {
+        transform: rotateY(0deg);
+    }
+
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+.loading {
+    animation: rotateYContinuous 8s linear infinite;
+}
+
+
+.colorMain {
+    background-color: #9B7040;
+}

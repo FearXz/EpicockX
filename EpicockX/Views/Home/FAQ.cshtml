@@ -1,0 +1,113 @@
+﻿@{
+
+}
+<style>
+    body{
+        background: #e3edf7;
+    }
+
+    .accordion {
+        margin: 60px auto;
+        width: 600px;
+    }
+
+    .accordion li {
+        list-style: none;
+        width: 100%;
+        margin: 20px;
+        paddig: 10px;
+        border-radius: 8px;
+        background: #e3edf7;
+        box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15), -6px -6px 10px -1px rgba(255, 255, 255, 0.7)
+    }
+
+    .accordion li label {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    label::before {
+        content: '+';
+        margin-right: 10px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    input[type="radio"] {
+        display: none;
+    }
+
+    .accordion .content {
+        color: #555;
+        padding: 0 10px;
+        line-height: 26px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s, padding 0.5s;
+    }
+
+    .accordion input[type="radio"]:checked + label + .content {
+        max-height: 400px;
+        padding: 10px 10px 20px;
+    }
+
+    .accordion input[type="radio"]:checked + label::before{
+        content: '-';
+    }
+</style>
+
+<div class="text-center">
+<h1 class=" fw-bold fs-2">Domande Frequenti (FAQ)</h1>
+<p>Benvenuti nella nostra sezione Domande Frequenti! Qui troverete le risposte alle domande più comuni riguardo al nostro negozio e ai nostri prodotti. Se non trovate la risposta che cercate, non esitate a contattarci.</p>
+</div>
+
+<ul class="accordion">
+    <li>
+        <input type="radio" name="accordion" id="first" />
+        <label for="first">1. Come posso effettuare un ordine?</label>
+        <div class="content">Effettuare un ordine è semplice! Basta navigare sul nostro sito, aggiungere i prodotti desiderati al carrello e seguire le istruzioni per il checkout. Potrete scegliere il metodo di pagamento che preferite e completare l'acquisto in pochi clic.</div>
+    </li>
+</ul>
+
+<ul class="accordion">
+    <li>
+        <input type="radio" name="accordion" id="second" />
+        <label for="second">2. Quali metodi di pagamento accettate?</label>
+        <div class="content">Accettiamo vari metodi di pagamento tra cui carte di credito/debito (Visa, MasterCard, American Express), PayPal e bonifico bancario.</div>
+    </li>
+</ul>
+
+<ul class="accordion">
+    <li>
+        <input type="radio" name="accordion" id="third" />
+        <label for="third">3. È sicuro fare acquisti sul vostro sito?</label>
+        <div class="content">Assolutamente sì. Utilizziamo tecnologie di crittografia avanzate per garantire che tutte le transazioni siano sicure e protette. La vostra privacy è la nostra priorità.</div>
+    </li>
+</ul>
+
+<ul class="accordion">
+    <li>
+        <input type="radio" name="accordion" id="fourth" />
+        <label for="fourth">4. Offrite spedizioni discrete?</label>
+        <div class="content">Sì, tutte le nostre spedizioni sono effettuate in confezioni anonime senza alcun riferimento al contenuto o al nostro negozio, garantendo la massima riservatezza.</div>
+    </li>
+</ul>
+
+<ul class="accordion">
+    <li>
+        <input type="radio" name="accordion" id="fifth" />
+        <label for="fifth">5. Quali sono i tempi di consegna?</label>
+        <div class="content">I tempi di consegna variano a seconda della destinazione. Generalmente, le consegne nazionali richiedono dai 2 ai 5 giorni lavorativi. Potrete trovare maggiori dettagli sui tempi di consegna durante il checkout.</div>
+    </li>
+</ul>
+
+<ul class="accordion">
+    <li>
+        <input type="radio" name="accordion" id="sixth" />
+        <label for="sixth">6. Quanto costa la spedizione?</label>
+        <div class="content">Le spese di spedizione sono calcolate in base al peso e alla destinazione dell'ordine. Offriamo anche la spedizione gratuita per ordini superiori a un certo importo, visibile durante il checkout.</div>
+    </li>
+</ul>

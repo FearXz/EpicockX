@@ -1,6 +1,5 @@
 ﻿using EpicockX.Models;
 using EpicockX.Services;
-using EpicockX.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EpicockX.Controllers
