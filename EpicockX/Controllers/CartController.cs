@@ -1,7 +1,7 @@
-﻿using EpicockX.Models;
+﻿using System.Security.Claims;
+using EpicockX.Models;
 using EpicockX.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace EpicockX.Controllers
 {
@@ -51,12 +51,6 @@ namespace EpicockX.Controllers
             return Redirect(session.Url);
         }
 
-        public IActionResult Result(int orderId, int userId)
-        {
-            var resultOrder = _cartSvc.GetResultOrder(orderId, userId);
-            return View(resultOrder);
-        }
-
         public IActionResult AddToCart(int id, string returnUrl)
         {
             List<Product> cart = _cartSvc.GetCart();
@@ -90,9 +84,9 @@ namespace EpicockX.Controllers
             return View();
         }
 
-        public IActionResult Success(string SessionId)
+        public IActionResult Success(string session_id)
         {
-            return View();
+            return View(_cartSvc.GetResultOrder(session_id));
         }
     }
 }
