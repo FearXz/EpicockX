@@ -12,6 +12,10 @@
  #deleteModal.show {
  display: block;
  }
+
+ .hidden {
+     dispay: none;
+ }
 </style>
 
 <div class="accordion" id="productsAccordion">
@@ -79,9 +83,10 @@
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#createProduct">
             <div class="accordion-body">
-                @using (Html.BeginForm("AddProduct", "BackOffice", FormMethod.Post))
+                @using (Html.BeginForm("AddProduct", "BackOffice", FormMethod.Post, new { id="addProductForm" }))
                 {
-                    @Html.HiddenFor(model => model.NewProduct.ProductId, new {  @id = "ProductId" })
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.NewProduct.ProductId, new {  id = "ProductId" })
                     @Html.Hidden("FormMode", "Create", new { id = "FormMode" })
                     <div class="mb-4">
                         @Html.LabelFor(model => model.NewProduct.ProductName, new { @class = "block text-sm font-medium text-gray-700" })
@@ -123,10 +128,9 @@
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#updateProduct">
             <div class="accordion-body">
-                @using (Html.BeginForm("UpdateProduct", "BackOffice", FormMethod.Post))
+                @using (Html.BeginForm("UpdateProduct", "BackOffice", FormMethod.Post, new { id="updateProductForm" }))
                 {
-                    @Html.Hidden("_method", "PUT")
-                    @Html.HiddenFor(model => model.NewProduct.ProductId, new { @id = "ProductId" })
+                    @Html.HiddenFor(model => model.NewProduct.ProductId, new { id = "ProductId" })
                     @Html.Hidden("FormMode", "Edit", new { id = "FormMode" })
                     <div class="mb-4">
                         @Html.LabelFor(model => model.NewProduct.ProductName, new { @class = "block text-sm font-medium text-gray-700" })
