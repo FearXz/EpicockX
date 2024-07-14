@@ -20,7 +20,7 @@
                     ProductImages = new List<string>();
                 }
                 ProductImage = value;
-                ProductImages = ProductImage.Split('?').ToList();
+                ProductImages = ProductImage != null ? ProductImage.Split('?').ToList() : [];
             }
         }
     }
