@@ -1,0 +1,14 @@
+﻿@model List<Product> 
+
+@{
+    Layout = null;
+}
+
+@if (Model != null && Model.Count > 0)
+{
+    <div>Articoli nel carrello: @Model.Count</div>
+}
+else
+{
+    <div>Il carrello è vuoto.</div>
+}
