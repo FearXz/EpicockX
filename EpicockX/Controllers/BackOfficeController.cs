@@ -27,7 +27,7 @@ namespace EpicockX.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddProduct(BackOfficeIndexViewModel viewModel, List<IFormFile> productImages)
+        public async Task<IActionResult> AddProduct(BackOfficeIndexViewModel viewModel, [FromForm] List<IFormFile> productImages)
         {
             if (!ModelState.IsValid)
             {
@@ -39,16 +39,17 @@ namespace EpicockX.Controllers
 
             if (productImages != null && productImages.Count > 0)
             {
-                foreach (var image in productImages)
+                foreach (var imageFile in productImages)
                 {
-                    if (image.Length > 0)
+                    if (imageFile.Length > 0)
                     {
                         // Crea un oggetto ProductImage per ogni immagine caricata
                         var productImage = new ProductImage
                         {
                             ProductId = viewModel.NewProduct.ProductId,
-                            ImageFile = image
+                            ImageFile = imageFile // Imposta il campo ImageFile con l'oggetto IFormFile corrente
                         };
+                        // Utilizza ImageService per caricare l'immagine e salvare l'URL nel database
                         _imageSvc.AddImage(productImage);
                     }
                 }
@@ -56,6 +57,7 @@ namespace EpicockX.Controllers
 
             return RedirectToAction("Index");
         }
+
 
 
         [HttpPost]
