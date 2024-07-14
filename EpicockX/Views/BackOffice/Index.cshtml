@@ -1,95 +1,9 @@
 ﻿@model EpicockX.Models.BackOfficeIndexViewModel
+@{
+    var crud = "create";
+}
 
 <style>
-    .custom-card {
-        border: 1px solid black;
-        margin: 10px;
-        padding: 10px;
-    }
-
-        .custom-card img {
-            margin: 10px auto;
-            display: block;
-            width: 200px;
-            height: auto;
-        }
-
-        .custom-card ul {
-            display: flex;
-            flex-wrap: wrap;
-            list-style-type: none;
-            padding: 0;
-            justify-content: center;
-        }
-
-        .custom-card li {
-            margin: 10px;
-        }
-
-        .custom-card h4 {
-            margin: 0;
-            text-align: center;
-        }
-
-        .custom-card form {
-            display: inline;
-            text-align: center;
-            width: 100%;
-        }
-
-        .custom-card button {
-            margin: 10px auto;
-            display: block;
-        }
-
-            .custom-card button[type="submit"] {
-                background-color: red;
-                color: white;
-                border: none;
-                padding: 5px 10px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                margin: 4px 2px;
-                cursor: pointer;
-            }
-
-                .custom-card button[type="submit"]:hover {
-                    background-color: #555;
-                }
-
-                .custom-card button[type="submit"]:active {
-                    background-color: red;
-                }
-
-                .custom-card button[type="submit"]:focus {
-                    outline: none;
-                }
-
-    /* Accordion Custom Styles */
-    .accordion-content {
-        display: none;
-    }
-
-        .accordion-content.show {
-            display: block;
-        }
-
-    .accordion-button {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-        .accordion-button .icon {
-            transition: transform 0.3s;
-        }
-
-        .accordion-button[aria-expanded="true"] .icon {
-            transform: rotate(180deg);
-        }
-
     /* Modal Custom Styles */
     #deleteModal {
         display: none;
@@ -100,14 +14,15 @@
         }
 </style>
 
-<div class="accordion" id="accordionExample">
-    <div class="accordion-item">
+<div class="accordion" id="productsAccordion">
+    <!-- Prodotti esistenti -->
+    <div class="accordion-item" id="getProducts">
         <h2 class="accordion-header">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Accordion Item #1
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                #1 Prodotti esistenti
             </button>
         </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#getProducts">
             <div class="accordion-body">
                 @if (Model.Products == null || !Model.Products.Any())
                 {
@@ -155,95 +70,19 @@
             </div>
         </div>
     </div>
-</div>
-
-<div id="generalAccordion" class="container mx-auto mt-5">
-    <!-- Products Section -->
-    <div class="rounded-none border border-neutral-200 bg-white dark:border-neutral-600 dark:bg-body-dark mb-4">
-        <h2 class="mb-0" id="flush-headingProducts">
-            <button class="accordion-button group relative flex w-full items-center rounded-none border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition hover:z-[2] focus:z-[3] focus:outline-none dark:bg-body-dark dark:text-white"
-                    type="button"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseProducts"
-                    onclick="toggleAccordion(this, 'flush-collapseProducts')">
-                <h3 class="text-xl">#1 Prodotti Esistenti</h3>
-                <span class="ml-auto h-5 w-5 shrink-0 transition-transform duration-200 ease-in-out icon">
-                    <i class="fas fa-chevron-down"></i>
-                </span>
+    <!-- Aggiungi un nuovo prodotto -->
+    <div class="accordion-item" id="createProduct">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <span id="accordionTitle">#2 Aggiungi un nuovo prodotto</span>
             </button>
         </h2>
-        <div id="flush-collapseProducts" class="accordion-content hidden border-0"
-             aria-labelledby="flush-headingProducts">
-            <div class="px-5 py-4">
-                <div class="container mx-auto">
-                    @if (Model.Products == null || !Model.Products.Any())
-                    {
-                        <div class="text-center text-gray-500">
-                            Non ci sono prodotti
-                        </div>
-                    }
-                    else
-                    {
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Nome</th>
-                                    <th scope="col">Descrizione</th>
-                                    <th scope="col">Quantità</th>
-                                    <th scope="col">Prezzo</th>
-                                    <th scope="col">Categoria</th>
-                                    <th scope="col">Marca</th>
-                                    <th scope="col">Azioni</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var product in Model.Products)
-                                {
-                                    <tr>
-                                        <td>@product.ProductName</td>
-                                        <td>@((product.ProductDescription.Length > 50) ? product.ProductDescription.Substring(0, 50) + "..." : product.ProductDescription)</td>
-                                        <td>@product.ProductQuantity</td>
-                                        <td>@product.ProductPrice&euro;</td>
-                                        <td>@product.ProductCategory</td>
-                                        <td>@product.ProductBrand</td>
-                                        <td>
-                                            <button type="button" class="btn btn-primary btn-sm" onclick="editProduct(@product.ProductId, '@product.ProductName', '@product.ProductDescription', @product.ProductQuantity, @product.ProductPrice, '@product.ProductCategory', '@product.ProductBrand')">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(@product.ProductId)">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Add/Edit Product Section -->
-    <div class="rounded-none border border-neutral-200 bg-white dark:border-neutral-600 dark:bg-body-dark mb-4">
-        <h2 class="mb-0" id="flush-headingAddProduct">
-            <button class="accordion-button group relative flex w-full items-center rounded-none border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition hover:z-[2] focus:z-[3] focus:outline-none dark:bg-body-dark dark:text-white"
-                    type="button"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseAddProduct"
-                    onclick="toggleAccordion(this, 'flush-collapseAddProduct')">
-                <h3 id="formHeader" class="text-xl">Aggiungi un Nuovo Prodotto</h3>
-                <span class="ml-auto h-5 w-5 shrink-0 transition-transform duration-200 ease-in-out icon">
-                    <i class="fas fa-chevron-down"></i>
-                </span>
-            </button>
-        </h2>
-        <div id="flush-collapseAddProduct" class="accordion-content hidden border-0"
-             aria-labelledby="flush-headingAddProduct">
-            <div class="px-5 py-4">
-                @using (Html.BeginForm("AddOrUpdateProduct", "BackOffice", FormMethod.Post))
+        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#createProduct">
+            <div class="accordion-body">
+                @using (Html.BeginForm("AddProduct", "BackOffice", FormMethod.Post))
                 {
-                    @Html.HiddenFor(model => model.NewProduct.ProductId, new { id = "ProductId" })
+                    @Html.HiddenFor(model => model.NewProduct.ProductId, new {  @id = "ProductId" })
+                    @Html.Hidden("FormMode", "Create", new { id = "FormMode" })
                     <div class="mb-4">
                         @Html.LabelFor(model => model.NewProduct.ProductName, new { @class = "block text-sm font-medium text-gray-700" })
                         @Html.TextBoxFor(model => model.NewProduct.ProductName, new { @class = "form-control", @id = "ProductName", @required = "required" })
@@ -275,76 +114,113 @@
             </div>
         </div>
     </div>
-
-    <!-- Delete Confirmation Modal -->
-    <div id="deleteModal" class="fixed inset-0 hidden overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen px-4 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-            </div>
-            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <div class="sm:flex sm:items-start">
-                        <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                            <i class="fas fa-exclamation-triangle text-red-600"></i>
-                        </div>
-                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Conferma eliminazione</h3>
-                            <div class="mt-2">
-                                <p class="text-sm text-gray-500">Sei sicuro di voler eliminare questo prodotto? Questa azione non può essere annullata.</p>
-                            </div>
-                        </div>
+    <!-- Modifica un prodotto esistente -->
+    <div class="accordion-item hidden" id="updateProduct">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <span id="accordionTitle">#2 Aggiungi un nuovo prodotto</span>
+            </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#updateProduct">
+            <div class="accordion-body">
+                @using (Html.BeginForm("UpdateProduct", "BackOffice", FormMethod.Post))
+                {
+                    @Html.Hidden("_method", "PUT")
+                    @Html.HiddenFor(model => model.NewProduct.ProductId, new { @id = "ProductId" })
+                    @Html.Hidden("FormMode", "Edit", new { id = "FormMode" })
+                    <div class="mb-4">
+                        @Html.LabelFor(model => model.NewProduct.ProductName, new { @class = "block text-sm font-medium text-gray-700" })
+                        @Html.TextBoxFor(model => model.NewProduct.ProductName, new { @class = "form-control", @id = "ProductName", @required = "required" })
                     </div>
-                </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" id="confirmDeleteButton" class="btn btn-danger">
-                        Elimina
+                    <div class="mb-4">
+                        @Html.LabelFor(model => model.NewProduct.ProductDescription, new { @class = "block text-sm font-medium text-gray-700" })
+                        @Html.TextBoxFor(model => model.NewProduct.ProductDescription, new { @class = "form-control", @id = "ProductDescription", @required = "required" })
+                    </div>
+                    <div class="mb-4">
+                        @Html.LabelFor(model => model.NewProduct.ProductQuantity, new { @class = "block text-sm font-medium text-gray-700" })
+                        @Html.TextBoxFor(model => model.NewProduct.ProductQuantity, new { @class = "form-control", @id = "ProductQuantity", @required = "required" })
+                    </div>
+                    <div class="mb-4">
+                        @Html.LabelFor(model => model.NewProduct.ProductPrice, new { @class = "block text-sm font-medium text-gray-700" })
+                        @Html.TextBoxFor(model => model.NewProduct.ProductPrice, new { @class = "form-control", @id = "ProductPrice", @required = "required" })
+                    </div>
+                    <div class="mb-4">
+                        @Html.LabelFor(model => model.NewProduct.ProductCategory, new { @class = "block text-sm font-medium text-gray-700" })
+                        @Html.TextBoxFor(model => model.NewProduct.ProductCategory, new { @class = "form-control", @id = "ProductCategory", @required = "required" })
+                    </div>
+                    <div class="mb-4">
+                        @Html.LabelFor(model => model.NewProduct.ProductBrand, new { @class = "block text-sm font-medium text-gray-700" })
+                        @Html.TextBoxFor(model => model.NewProduct.ProductBrand, new { @class = "form-control", @id = "ProductBrand", @required = "required" })
+                    </div>
+                    <div>
+                        <input type="submit" id="formButton" value="Modifica" class="btn btn-primary" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- Aggiungi immagini al prodotto esistente -->
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                #3 Aggiungi immagini ad un prodotto
+            </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown button
                     </button>
-                    <button type="button" onclick="closeDeleteModal()" class="btn btn-secondary">
-                        Annulla
-                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Add/Edit Images Section -->
-    <h3 class="mb-4">Aggiungi/Modifica Immagini</h3>
-    <form asp-action="AddProductImage" method="post" class="mb-4">
-        <div class="form-group">
-            <label for="ProductId">ID Prodotto</label>
-            <input type="number" id="ProductId" name="ProductId" class="form-control" required />
-        </div>
-        <div class="form-group">
-            <label for="ProductImageUrl">URL Immagine</label>
-            <input type="text" id="ProductImageUrl" name="ProductImageUrl" class="form-control" required />
-        </div>
-        <button type="submit" class="btn btn-primary">Aggiungi Immagine</button>
-    </form>
 </div>
+
+<!-- Modale di Conferma -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Conferma Cancellazione</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Sei sicuro di voler cancellare questo elemento?
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("DeleteProduct", "BackOffice", FormMethod.Post, new { id = "deleteProductForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" id="deleteProductId" value="" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                    <input type="submit" class="btn btn-danger" value="Conferma" />
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     <script>
-        function toggleAccordion(button, contentId) {
-            const content = document.getElementById(contentId);
-            const icon = button.querySelector('i');
-            const expanded = button.getAttribute('aria-expanded') === 'true';
-
-            if (expanded) {
-                button.setAttribute('aria-expanded', 'false');
-                content.classList.add('hidden');
-                icon.classList.add('fa-chevron-down');
-                icon.classList.remove('fa-chevron-up');
-            } else {
-                button.setAttribute('aria-expanded', 'true');
-                content.classList.remove('hidden');
-                icon.classList.remove('fa-chevron-down');
-                icon.classList.add('fa-chevron-up');
-            }
-        }
-
         function editProduct(id, name, description, quantity, price, category, brand) {
-            document.getElementById('formHeader').textContent = 'Modifica ' + name;
-            document.getElementById('formButton').value = 'Modifica';
+
+            // Nascondi il form di creazione e mostra quello di update
+            document.getElementById('createProduct').classList.add('hidden');
+            document.getElementById('updateProduct').classList.remove('hidden');
+
+            // Seleziona il form di update tramite il suo ID
+            var updateForm = document.getElementById('updateProductForm');
+
+            // Popola i campi del form di update con i dati del prodotto
             document.getElementById('ProductId').value = id;
             document.getElementById('ProductName').value = name;
             document.getElementById('ProductDescription').value = description;
@@ -353,60 +229,43 @@
             document.getElementById('ProductCategory').value = category;
             document.getElementById('ProductBrand').value = brand;
 
-            const accordion = document.getElementById('flush-collapseAddProduct');
-            if (accordion.classList.contains('hidden')) {
-                toggleAccordion(accordion.previousElementSibling.querySelector('button'), 'flush-collapseAddProduct');
-            }
-            // Scroll to the form
-            document.getElementById('flush-headingAddProduct').scrollIntoView({ behavior: 'smooth' });
+            // Gestione dell'apertura e chiusura degli accordion
+            let collapseOne = new bootstrap.Collapse(document.getElementById('collapseOne'), { toggle: false });
+            let collapseThree = new bootstrap.Collapse(document.getElementById('collapseThree'), { toggle: true });
+
+            // Scroll verso l'accordion del form
+            document.getElementById('collapseThree').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function confirmDelete(id) {
-            document.getElementById('deleteModal').classList.remove('hidden');
-            document.getElementById('confirmDeleteButton').onclick = function () {
-                deleteProduct(id);
-            };
+
+
         }
 
-        function closeDeleteModal() {
-            document.getElementById('deleteModal').classList.add('hidden');
-        }
-
-        function deleteProduct(id) {
-            $.ajax({
-                url: '@Url.Action("DeleteProduct", "BackOffice")/' + id,
-                type: 'POST',
-                success: function (result) {
-                    location.reload();
-                }
-            });
-        }
-    </script>
-
-    <script>
-        // Function to toggle accordion
-        function toggleAccordion(button, target) {
-            var content = document.getElementById(target);
-            var expanded = button.getAttribute('aria-expanded') === 'true';
-            button.setAttribute('aria-expanded', !expanded);
-            content.classList.toggle('show');
-        }
-
-        // Function to show delete modal
         function confirmDelete(productId) {
-            var modal = document.getElementById('deleteModal');
-            var confirmButton = document.getElementById('confirmDeleteButton');
-            modal.classList.add('show');
-            confirmButton.onclick = function () {
-                // Your delete logic here
-                modal.classList.remove('show');
-            };
+            // Imposta l'ID del prodotto nel campo nascosto del form
+            document.getElementById('deleteProductId').value = productId;
+
+            // Mostra il modale
+            $('#deleteModal').modal('show');
         }
 
-        // Function to close delete modal
         function closeDeleteModal() {
-            var modal = document.getElementById('deleteModal');
-            modal.classList.remove('show');
+            $('#deleteModal').modal('hide');
         }
+
+        // Associa la chiusura del modale ai bottoni di chiusura e annulla
+        document.addEventListener('DOMContentLoaded', function () {
+            // Chiudi il modale quando si clicca sulla X
+            document.querySelectorAll('[data-dismiss="modal"]').forEach(function (element) {
+                element.addEventListener('click', function () {
+                    closeDeleteModal();
+                });
+            });
+
+            // Chiudi il modale quando si clicca su Annulla
+            document.getElementById('closeModalButton').addEventListener('click', closeDeleteModal);
+        });
+
     </script>
 }
