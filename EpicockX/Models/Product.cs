@@ -10,13 +10,15 @@
         public string ProductCategory { get; set; }
         public string ProductBrand { get; set; }
         public List<string> ProductImages { get; set; } = new List<string>();
+
+        private string _productImage;
         public string? ProductImage
         {
-            get => ProductImage;
+            get => _productImage;
             set
             {
-                ProductImage = value != null ? value : "";
-                ProductImages = ProductImage.Split('?').ToList();
+                _productImage = value ?? "";
+                ProductImages = _productImage.Split('?').ToList();
             }
         }
     }
