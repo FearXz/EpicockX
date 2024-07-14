@@ -9,17 +9,7 @@
         public decimal ProductPrice { get; set; }
         public string ProductCategory { get; set; }
         public string ProductBrand { get; set; }
+        public string ProductImage { get; set; }
         public List<string> ProductImages { get; set; } = new List<string>();
-
-        private string _productImage;
-        public string? ProductImage
-        {
-            get => _productImage;
-            set
-            {
-                _productImage = value ?? "";
-                ProductImages = _productImage.Split('?').ToList();
-            }
-        }
     }
 }

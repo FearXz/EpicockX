@@ -44,6 +44,10 @@ namespace EpicockX.Services
                                 product.ProductCategory = reader.GetString(5);
                                 product.ProductBrand = reader.GetString(6);
                                 product.ProductImage = reader.GetString(7);
+                                product.ProductImages =
+                                    product.ProductImage != null
+                                        ? product.ProductImage.Split('?').ToList()
+                                        : new List<string>();
                                 products.Add(product);
                             }
                         }
