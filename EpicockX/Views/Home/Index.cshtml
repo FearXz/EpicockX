@@ -13,8 +13,7 @@
     <div class="position-relative bg-white rounded-5 overflow-hidden" style="margin: auto;">
         <div class="p-4 d-flex align-items-center justify-content-between bg-dark rounded-top" id="scontoHd">
             <h2 class="fw-bold text-white">Promozione Speciale!</h2>
-            <button id="closePromo" class="text-secondary">
-                <i class="fas fa-times text-white"></i>
+            <button id="closePromo" class="ms-2 btn-close ">   
             </button>
         </div>
         <iframe src="https://www.youtube.com/embed/sdlV_Z06R8U?autoplay=1" allow="autoplay" class="w-100" frameborder="0" allowfullscreen></iframe>
@@ -28,9 +27,10 @@
 
 
 <div class=" text-white bgIndex">
-    <div class="relative">
-        <img src="~/assets/images/banner/index.jpg" alt="Banner Logo" class="w-full" />
-        <div class="loader  absolute top-5 right-20 p-4">
+    <div class="position-relative">
+        <img src="~/assets/images/banner/index.jpg" alt="Banner Logo" class="w-100" />
+        <div class="loader position-absolute" style="top: 1.25rem; right: 5rem; padding: 1rem;">
+
             <div class="shape">
                 <div class="numRowContainer">
                     @for (int i = 0; i < 10; i++)
@@ -41,250 +41,296 @@
             </div>
         </div>
     </div>
-    <div class="border-b border-gray-300">
-        <h1 class="text-center pt-1 text-3xl font-bold pb-4">Benvenuti su Epicock</h1>
-    </div>  
-  <div class="w-100 mx-auto">
-    <h2 class="text-center text-xl pt-3 pb-3 ">Prodotti in evidenza</h2>
-        <div class=" flex justify-center  items-center ">
-
-            <div class="grid grid-cols-4 gap-5">
+    <div class="border-bottom border-secondary">
+        <h1 class="text-center pt-1 display-4 fw-bold pb-4">Benvenuti su Epicock</h1>
+    </div>
+    <div class="w-100 mx-auto">
+        <h2 class="text-center pt-3 pb-3 h4">Prodotti in evidenza</h2>
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="row g-3">
                 @foreach (var product in Model.Take(4))
                 {
-                    <div class="card" data-content="@product.ProductName">
-                        @foreach (var image in Model.Take(1))
-                        {
-                            <div class="first-content">
-                                <img src="@image.ProductImages" alt="Immagine del prodotto" class="w-full h-full" />
-                            </div>
-                            <div class="second-content flex-column">
-                                <img src="@image.ProductImages" alt="Immagine del prodotto" class="w-full h-full" />
-                                <p>@product.ProductName</p>
-                                
-                            </div>
-                        }
+                    <div class="col-3">
+                        <div class="card" data-content="@product.ProductName">
+                            @foreach (var image in Model.Take(1))
+                            {
+                                <div class="first-content">
+                                    <img src="@image.ProductImages" alt="Immagine del prodotto" class="card-img-top" />
+                                </div>
+                                <div class="second-content d-flex flex-column">
+                                    <img src="@image.ProductImages" alt="Immagine del prodotto" class="img-fluid" />
+                                    <p class="card-text">@product.ProductName</p>
+                                </div>
+                            }
+                        </div>
                     </div>
                 }
-            </div>    
-        </div>
-        <div class="relative mt-5 w-75 mx-auto">
-            <img id="fade-img" src="https://media.discordapp.net/attachments/1239481273236455506/1261029960597114961/Overlay20block204_1920x84020px.png?ex=6691792b&is=669027ab&hm=1fe494e2efa20729c88cec80932c3b63ccde666e144950a524d6b7b540eaa83c&=&format=webp&quality=lossless&width=1025&height=449" alt="Alternate Text" class="w-full fade-in-img rounded-lg" />
-            <div class="loading absolute top-10 left-20 rounded-full">
-                <p class="side front flex justify-center items-center text-lg font-bold">FREE <br /> TOYS </p>
-            </div>
-        </div>
-        <div class="grid grid-cols-4  text-center py-20 ">
-            <div class=" flex flex-column justify-center items-center">
-                <img src="https://assets.lelo.com/dx/2024-05/WEB_DX_red_dot_2024-116.svg?VersionId=RGcYqyl2tmPJfdhIa10DL_dMD.lYcaE2" alt=" Enigma Wave" class="w-50"/>
-                <h3 class="font-bold">ENIGMA Wave™</h3>
-                <p>Il piacere è un'arte. Ecco il tuo pennello.</p>
-            </div>
-            <div class=" flex flex-column justify-center items-center">
-                <img src="https://assets.lelo.com/dx/2024-03/XBIZ_EUROPA_Awards_2023.svg?VersionId=Y2oi0dxbtTg.ZBpRCNeKrKS6k8pxLm9_" alt=" Epicock Dot" class="w-50" />
-                <h3 class="font-bold">EPICOCK DOT™</h3>
-                <p>Sex Toy of the Year</p>
-            </div>
-            <div class=" flex flex-column justify-center items-center">
-                <img src="https://assets.lelo.com/dx/2022-05/AWARD_XBIZ_Awards_2022_150x135px.svg?VersionId=Vv1lbQuLMGlVXHEd6sF1UMicwQ.zTP1b" alt=" Xbiz Awards" class="w-50" />
-                <h3 class="font-bold">EPICOCK</h3>
-                <p>Luxury Brand of the Year.</p>
-            </div>
-            <div class=" flex flex-column justify-center items-center">
-                <img src="https://assets.lelo.com/dx/2022-02/AWARD_Adultex_Awards_2019_150x135px.svg?VersionId=LucdLtnlifOP8skrgjK_KhC.5ZZxD8ur" alt=" Adultex" class="w-50" />
-                <h3 class="font-bold">EPICOCK</h3>
-                <p>Best Luxury Toy Range.</p>
             </div>
         </div>
 
-        <div class="video-container mt-3 w-75 mx-auto">
-            <iframe src="https://fast.wistia.com/embed/iframe/vsf1015i1v?autoPlay=1&playSuspendedOffScreen=1" allow="autoplay" class=" rounded-lg" frameborder="0" allowfullscreen ></iframe>
-         </div>
-         <div class="w-75 mx-auto">
-         <div class="grid grid-cols-2 mt-20   overflow-hidden">
-                <img class="img-scale" src="https://assets.lelo.com/dx/2024-07/homepage%20layout_desktop_BLOCK%203.jpg?VersionId=gMHrJyS61yG9k6UTmGF1mbX8ctYpwdy9" alt="Alternate Text" />
-             <div class="mx-5 flex flex-column text-center justify-center">
-                <h3 class="font-bold mb-2 text-lg">PIU GRANDE DELLA VITA</h3>
-                <p>F1S™ V3 è una console di piacere connessa a un'app, aggiornata con funzionalità avanzate per soddisfare le tue fantasie più spettacolari, disponibile in una dimensione regolare e in una nuova taglia XL.</p>
-             </div>
-         </div>
-        <div class="grid grid-cols-2 mt-20 pb-20  overflow-hidden">
-            <div class="mx-5 flex flex-column text-center justify-center">
-                <h3 class="font-bold mb-2 text-lg">IL PIACERE A PORTATA DI MANO</h3>
-                <p>Scopri ENIGMA Wave™, il nostro massaggiatore sonico all'avanguardia a tripla azione che cambierà completamente il tuo modo di pensare agli orgasmi combinati.</p>
-            </div>
-            <img class="img-scale" src="https://assets.lelo.com/dx/2024-05/Home_page_desktop_promo_ENIGMA_Wave_1000x610px.jpg?VersionId=mRAjkFifPdRQ5FNEzBhwGt3wHs5ogwQZ" alt="Alternate Text" />
-            
-        </div> 
-        <div class="col-span-2 grid grid-cols-2 gap-10 bgAchievement">
-            <div class="grid grid-rows-4">
-                <div class="ms-5 flex justify-center items-center gap-4">
-                    <img src="https://assets.lelo.com/dx/2023-08/TECH_TRIPLE_PLEASURE_60x60-98.svg?VersionId=g.FC_hq1P5e_1TnZjOgttq8uc9sSv6ao" alt="Testo alternativo" class="w-20 pe-1 border-r border-white-30" />
-                    <h2 class="text-base">1 - TRE MOTORI PER UN TRIPLICE  PIACERE</h2>
-                    <p class="text-end">Tre motori potenti offrono una sensazione avvolgente dentro e fuori.</p>
-                </div>
-                <div class="ms-5 mt-2 flex justify-center items-center gap-4">
-                    <img src="https://assets.lelo.com/dx/2024-06/Features_2_SENSONIC%20TECHNOLOGY.svg?VersionId=cquk0Qmw1uTXAtO_Z0U5tC4.9ZRsC2TI" alt="Testo alternativo" class="w-20 pe-1 border-r border-white-30" />
-                    <h2 class="text-base">2 - TECNOLOGIA SENSONIC</h2>
-                    <p class="text-end">Senza fare contatto diretto, le onde soniche doppie ENIGMA offrono una stimolazione clitoridea veloce ma delicata per un piacere immenso.</p>
-                </div>
-                <div class="ms-5 mt-2 flex justify-center items-center gap-4">
-                    <img src="https://assets.lelo.com/dx/2024-06/Features_3_ERGONOMIC%20INTERNAL%20STIMULATOR.svg?VersionId=YRLBSN7I5W6_RAQdGvFVfnepKHfnNYCf" alt="Testo alternativo" class="w-20 pe-1 border-r border-white-30" />
-                    <h2 class="text-base">3 - STIMOLATORE INTERNO ERGONOMICO</h2>
-                    <p class="text-end">Presenta una punta sonica speciale nella parte superiore che emette onde soniche profonde verso il punto A per una sensazione completamente nuova, oltre a sensazioni vibranti verso il punto G.</p>
-                </div>
-                <div class="ms-5 mt-2 flex justify-center items-center gap-4">
-                    <img src="https://assets.lelo.com/dx/2024-06/Features_4_APP-CONNECTED.svg?VersionId=Sn7bEqysZMWlTe8P6_M7ndRB6oTHjL5n" alt="Testo alternativo" class="w-20 pe-1 border-r border-white-30" />
-                    <h2 class="text-base">4 - CONNESSO ALL'APP</h2>
-                    <p class="text-end">Utilizzando l'app LELO, gli utenti possono sbloccare due modalitï¿½ esclusive, FINISH ME OFF e OUT OF CONTROL, e sperimentare il controllo indipendente dei motori.</p>
-                </div>
-            </div>
-            <div class="flex justify-end items-center">
-                <img src="./assets/images/Homepage/fuoco.gif" alt="Logo del banner" class="w-100 " id="foto" />
+
+
+
+
+
+
+
+
+        <div class="position-relative mt-5 w-75" style="margin: 0 auto;">
+            <img id="fade-img" src="https://media.discordapp.net/attachments/1239481273236455506/1261029960597114961/Overlay20block204_1920x84020px.png?ex=6691792b&is=669027ab&hm=1fe494e2efa20729c88cec80932c3b63ccde666e144950a524d6b7b540eaa83c&=&format=webp&quality=lossless&width=1025&height=449" alt="Alternate Text" class="w-100 fade-in-img rounded" />
+            <div class="loading position-absolute top-10 start-20 ">
+                <p class="side front d-flex justify-content-center align-items-center fw-bold">FREE <br /> TOYS </p>
             </div>
         </div>
-        <!-- article -->
-            <div class=" pt-24 sm:pt-32 pb-20">
-                <div class="mx-auto max-w-7xl px-6 lg:px-8">
-                    <div class="mx-auto max-w-2xl lg:mx-0">
-                        <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">BLOG</h2>
-                        <p class="mt-2 text-lg leading-8 text-light">Unisciti alla community.</p>
+
+
+        <div class="container py-5">      
+            <div class="row text-center">
+                <div class="col-3 d-flex flex-column justify-content-center align-items-center">
+                    <img src="https://assets.lelo.com/dx/2024-05/WEB_DX_red_dot_2024-116.svg?VersionId=RGcYqyl2tmPJfdhIa10DL_dMD.lYcaE2" alt="Enigma Wave" class="img-fluid mb-2" />
+                    <h3 class="fw-bold">ENIGMA Wave™</h3>
+                    <p>Il piacere è un'arte. Ecco il tuo pennello.</p>
+                </div>
+                <div class="col-3 d-flex flex-column justify-content-center align-items-center">
+                    <img src="https://assets.lelo.com/dx/2024-03/XBIZ_EUROPA_Awards_2023.svg?VersionId=Y2oi0dxbtTg.ZBpRCNeKrKS6k8pxLm9_" alt="Epicock Dot" class="img-fluid mb-2" />
+                    <h3 class="fw-bold">EPICOCK DOT™</h3>
+                    <p>Sex Toy of the Year</p>
+                </div>
+                <div class="col-3 d-flex flex-column justify-content-center align-items-center">
+                    <img src="https://assets.lelo.com/dx/2022-05/AWARD_XBIZ_Awards_2022_150x135px.svg?VersionId=Vv1lbQuLMGlVXHEd6sF1UMicwQ.zTP1b" alt="Xbiz Awards" class="img-fluid mb-2" />
+                    <h3 class="fw-bold">EPICOCK</h3>
+                    <p>Luxury Brand of the Year</p>
+                </div>
+                <div class="col-3 d-flex flex-column justify-content-center align-items-center">
+                    <img src="https://assets.lelo.com/dx/2022-02/AWARD_Adultex_Awards_2019_150x135px.svg?VersionId=LucdLtnlifOP8skrgjK_KhC.5ZZxD8ur" alt="Adultex" class="img-fluid mb-2" />
+                    <h3 class="fw-bold">EPICOCK</h3>
+                    <p>Best Luxury Toy Range</p>
+                </div>
+            </div>
+        </div>
+        <div class="video-container mt-3 w-75" style="margin:0 auto;">
+            <iframe src="https://fast.wistia.com/embed/iframe/vsf1015i1v?autoPlay=1&playSuspendedOffScreen=1" allow="autoplay" class="rounded-5" frameborder="0" allowfullscreen ></iframe>
+         </div>
+         <div class="w-75" style="margin: 0 auto;">
+            <div class="container mt-10">
+                <div class="row row-cols-2">
+                    <div class="col">
+                        <img class="img-fluid img-scale" src="https://assets.lelo.com/dx/2024-07/homepage%20layout_desktop_BLOCK%203.jpg?VersionId=gMHrJyS61yG9k6UTmGF1mbX8ctYpwdy9" alt="Alternate Text" />
                     </div>
-                    <div class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-5">
-                        <article class="flex max-w-xl flex-col items-start justify-between">
-                            <div class="flex items-center gap-x-4 text-xs">
-                                <time datetime="2020-03-16" class="text-gray-500">Mar 16, 2024</time>
-                                <button class="btn  rounded-full colorMain px-3 py-1.5 font-medium text-black">Erotico</button>
+                    <div class="col d-flex flex-column justify-content-center text-center">
+                        <h3 class="font-weight-bold mb-2">PIU GRANDE DELLA VITA</h3>
+                        <p>F1S™ V3 è una console di piacere connessa a un'app, aggiornata con funzionalità avanzate per soddisfare le tue fantasie più spettacolari, disponibile in una dimensione regolare e in una nuova taglia XL.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-10 pb-5 ">
+                <div class="row row-cols-2">
+                    <div class="col d-flex flex-column justify-content-center text-center ">
+                        <h3 class="font-weight-bold mb-2">IL PIACERE A PORTATA DI MANO</h3>
+                        <p>Scopri ENIGMA Wave™, il nostro massaggiatore sonico all'avanguardia a tripla azione che cambierà completamente il tuo modo di pensare agli orgasmi combinati.</p>
+                    </div>
+                    <div class="col">
+                        <img class="img-fluid img-scale" src="https://assets.lelo.com/dx/2024-05/Home_page_desktop_promo_ENIGMA_Wave_1000x610px.jpg?VersionId=mRAjkFifPdRQ5FNEzBhwGt3wHs5ogwQZ" alt="Alternate Text" />
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="row justify-content-between g-5 bgAchievement mt-5">
+                <div class="col-6">
+                    <div class="row row-cols-1 g-3">
+                        <div class="d-flex align-items-center ms-5">
+                            <img src="https://assets.lelo.com/dx/2023-08/TECH_TRIPLE_PLEASURE_60x60-98.svg?VersionId=g.FC_hq1P5e_1TnZjOgttq8uc9sSv6ao" alt="Testo alternativo" class="imgScale pe-2 border-end border-white-30" />
+                            <div>
+                                <h2 class="fs-6">1 - TRE MOTORI PER UN TRIPLICE PIACERE</h2>
+                                <p class="text-end">Tre motori potenti offrono una sensazione avvolgente dentro e fuori.</p>
                             </div>
-                            <div class="group relative">
-                                <h3 class="mt-3 text-lg font-semibold leading-6 text-white-900 group-hover:text-white-600">
-                                    <a href="#">
-                                        <span class="absolute inset-0"></span>
+                        </div>
+                        <div class="d-flex align-items-center ms-5 mt-2">
+                            <img src="https://assets.lelo.com/dx/2024-06/Features_2_SENSONIC%20TECHNOLOGY.svg?VersionId=cquk0Qmw1uTXAtO_Z0U5tC4.9ZRsC2TI" alt="Testo alternativo" class="imgScale pe-2 border-end border-white-30" />
+                            <div>
+                                <h2 class="fs-6">2 - TECNOLOGIA SENSONIC</h2>
+                                <p class="text-end">Senza fare contatto diretto, le onde soniche doppie ENIGMA offrono una stimolazione clitoridea veloce ma delicata per un piacere immenso.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center ms-5 mt-2">
+                            <img src="https://assets.lelo.com/dx/2024-06/Features_3_ERGONOMIC%20INTERNAL%20STIMULATOR.svg?VersionId=YRLBSN7I5W6_RAQdGvFVfnepKHfnNYCf" alt="Testo alternativo" class="imgScale pe-2 border-end border-white-30" />
+                            <div>
+                                <h2 class="fs-6">3 - STIMOLATORE INTERNO ERGONOMICO</h2>
+                                <p class="text-end">Presenta una punta sonica speciale nella parte superiore che emette onde soniche profonde verso il punto A per una sensazione completamente nuova, oltre a sensazioni vibranti verso il punto G.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center ms-5 mt-2">
+                            <img src="https://assets.lelo.com/dx/2024-06/Features_4_APP-CONNECTED.svg?VersionId=Sn7bEqysZMWlTe8P6_M7ndRB6oTHjL5n" alt="Testo alternativo" class="imgScale pe-2 border-end border-white-30" />
+                            <div>
+                                <h2 class="fs-6">4 - CONNESSO ALL'APP</h2>
+                                <p class="text-end">Utilizzando l'app LELO, gli utenti possono sbloccare due modalità esclusive, FINISH ME OFF e OUT OF CONTROL, e sperimentare il controllo indipendente dei motori.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="col-5 m-0 p-0 d-flex justify-content-center align-items-center">
+                    <img src="./assets/images/Homepage/fuoco.gif" alt="Logo del banner" class="img-fluid w-100" id="foto" />
+                </div>
+            </div>
+
+        <!-- article -->
+            <div class="pt-5 pt-md-8 pb-4">
+                <div class="container">
+                    <div class="text-center mb-4">
+                        <h2 class="display-4 font-weight-bold text-white">BLOG</h2>
+                        <p class="mt-2 lead text-light">Unisciti alla community.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-5 pb-10">
+                <div class="row row-cols-5 g-4 justify-content-center">
+                    
+                        <article class="col  d-flex flex-column max-w-xl position-relative ">
+                            <div class="d-flex align-items-center mb-2 text-muted small">
+                                <time datetime="2020-03-16" class="text-secondary">Mar 16, 2024</time>
+                                <button class="btn  btn-yellow-700 ms-4 rounded-pill px-3 py-1">Erotico</button>
+                            </div>
+                            <div class="position-relative mb-10">
+                                <h3 class="mt-3 h5 font-weight-bold text-white">
+                                    <a href="#" class="text-decoration-none text-white">
                                         Esplora nuove frontiere del piacere
                                     </a>
                                 </h3>
-                                <p class="mt-5 line-clamp-3 text-sm leading-6 text-white-600">Se stai cercando di portare il tuo piacere a un nuovo livello, ti consiglio vivamente il nostro vibratore multifunzione. Con diverse modalità e intensità, troverai sicuramente quella perfetta per te. Non lasciarti sfuggire l'occasione di vivere un'esperienza indimenticabile.</p>
+                                <p class="mt-3 text-white">
+                                    Se stai cercando di portare il tuo piacere a un nuovo livello, ti consiglio vivamente il nostro vibratore multifunzione. Con diverse modalità e intensità, troverai sicuramente quella perfetta per te. Non lasciarti sfuggire l'occasione di vivere un'esperienza indimenticabile.
+                                </p>
                             </div>
-                            <div class="relative mt-8 flex items-center gap-x-4">
-                                <img src="https://avatars.githubusercontent.com/u/164867789?v=4&size=64" alt="" class="h-10 w-10 rounded-full bg-gray-50">
-                                <div class="text-sm leading-6">
-                                    <p class="font-semibold text-white-900">
-                                        <a href="https://github.com/SasyB1">
-                                            <span class="absolute inset-0"></span>
+                        <div class="d-flex align-items-center mt-4 position-absolute bottom-0">
+                            <img src="https://avatars.githubusercontent.com/u/164867789?v=4&size=64" alt="" class="imgScale rounded-circle bg-light">
+                                <div class="text-sm ms-3">
+                                    <p class="font-weight-bold text-white">
+                                        <a href="https://github.com/SasyB1" class="text-white text-decoration-none">
                                             Salvatore Buonaiuto
                                         </a>
                                     </p>
-                                    <p class="text-white-600">Co-Founder / CTO</p>
+                                    <p class="text-light">Co-Founder / CTO</p>
                                 </div>
                             </div>
                         </article>
-                        <article class="flex max-w-xl flex-col items-start justify-between">
-                            <div class="flex items-center gap-x-4 text-xs">
-                                <time datetime="2020-03-16" class="text-gray-500">Mar 16, 2024</time>
-                                <button class="btn  rounded-full colorMain px-3 py-1.5 font-medium text-black">Erotico</button>
+
+                        <article class="col d-flex flex-column max-w-xl position-relative ">
+                            <div class="d-flex align-items-center mb-2 small text-muted">
+                                <time datetime="2020-03-16" class="text-secondary">Mar 16, 2024</time>
+                            <button class="btn btn-yellow-700 ms-4 rounded-pill px-3 py-1">Erotico</button>
                             </div>
-                            <div class="group relative">
-                                <h3 class="mt-3 text-lg font-semibold leading-6 text-white-900 group-hover:text-white-600">
-                                    <a href="#">
-                                        <span class="absolute inset-0"></span>
+                            <div class="position-relative">
+                                <h3 class="mt-3 h5 font-weight-bold text-white">
+                                    <a href="#" class="text-decoration-none text-white">
                                         Scopri il potere del tocco
                                     </a>
                                 </h3>
-                                <p class="mt-5 line-clamp-3 text-sm leading-6 text-white-600">Per chi desidera migliorare l'intimità di coppia, suggerisco il nostro olio da massaggio riscaldante. È perfetto per creare un'atmosfera rilassante e sensuale, trasformando ogni tocco in un'esperienza straordinaria. Provalo e vedrai la differenza!</p>
+                                <p class="mt-3 text-white">
+                                    Per chi desidera migliorare l'intimità di coppia, suggerisco il nostro olio da massaggio riscaldante. È perfetto per creare un'atmosfera rilassante e sensuale, trasformando ogni tocco in un'esperienza straordinaria. Provalo e vedrai la differenza!
+                                </p>
                             </div>
-                            <div class="relative mt-8 flex items-center gap-x-4">
-                                <img src="https://avatars.githubusercontent.com/u/161967392?v=4" alt="" class="h-10 w-10 rounded-full bg-gray-50">
-                                <div class="text-sm leading-6">
-                                    <p class="font-semibold text-white-900">
-                                        <a href="https://github.com/mrz1mm">
-                                            <span class="absolute inset-0"></span>
+                        <div class="d-flex align-items-center mt-4 position-absolute bottom-0">
+                            <img src="https://avatars.githubusercontent.com/u/161967392?v=4" alt="" class="imgScale rounded-circle bg-light">
+                            <div class="text-sm ms-3">
+                                    <p class="font-weight-bold text-white">
+                                        <a href="https://github.com/mrz1mm" class="text-white text-decoration-none">
                                             Simone Attanasio
                                         </a>
                                     </p>
-                                    <p class="text-white-600">Co-Founder / CTO</p>
+                                <p class="text-light">Co-Founder / CTO</p>
                                 </div>
                             </div>
                         </article>
-                        <article class="flex max-w-xl flex-col items-start justify-between">
-                            <div class="flex items-center gap-x-4 text-xs">
-                                <time datetime="2020-03-16" class="text-gray-500">Mar 16, 2024</time>
-                                <button class="btn  rounded-full colorMain px-3 py-1.5 font-medium text-black">Erotico</button>
+
+                        <article class="col d-flex flex-column max-w-xl position-relative">
+                            <div class="d-flex align-items-center mb-2 small text-muted">
+                                <time datetime="2020-03-16" class="text-secondary">Mar 16, 2024</time>
+                            <button class="btn btn-yellow-700 ms-4 rounded-pill px-3 py-1">Erotico</button>
                             </div>
-                            <div class="group relative">
-                                <h3 class="mt-3 text-lg font-semibold leading-6 text-white-900 group-hover:text-white-600">
-                                    <a href="#">
-                                        <span class="absolute inset-0"></span>
+                            <div class="position-relative">
+                                <h3 class="mt-3 h5 font-weight-bold text-white">
+                                    <a href="#" class="text-decoration-none text-white">
                                         Giochi di coppia per un'intimità intensa
                                     </a>
                                 </h3>
-                                <p class="mt-5 line-clamp-3 text-sm leading-6 text-white-600">Se sei alla ricerca di nuovi modi per giocare in coppia, il nostro kit di bondage è quello che fa per te. Include tutto il necessario per esplorare nuove dinamiche di piacere e costruire un legame ancora più forte con il tuo partner.</p>
+                                <p class="mt-3 text-white">
+                                    Se sei alla ricerca di nuovi modi per giocare in coppia, il nostro kit di bondage è quello che fa per te. Include tutto il necessario per esplorare nuove dinamiche di piacere e costruire un legame ancora più forte con il tuo partner.
+                                </p>
                             </div>
-                            <div class="relative mt-8 flex items-center gap-x-4">
-                                <img src="https://avatars.githubusercontent.com/u/164650117?v=4" alt="" class="h-10 w-10 rounded-full bg-gray-50">
-                                <div class="text-sm leading-6">
-                                    <p class="font-semibold text-white-900">
-                                        <a href="https://github.com/giugnosaro">
-                                            <span class="absolute inset-0"></span>
-                                           Rosario Giugno
+                        <div class="d-flex align-items-center mt-4 position-absolute bottom-0">
+                            <img src="https://avatars.githubusercontent.com/u/164650117?v=4" alt="" class="imgScale rounded-circle bg-light">
+                            <div class="text-sm ms-3">
+                                    <p class="font-weight-bold text-white">
+                                        <a href="https://github.com/giugnosaro" class="text-white text-decoration-none">
+                                            Rosario Giugno
                                         </a>
                                     </p>
-                                    <p class="text-white-600">Co-Founder / CTO</p>
+                                <p class="text-light">Co-Founder / CTO</p>
                                 </div>
                             </div>
                         </article>
-                        <article class="flex max-w-xl flex-col items-start justify-between">
-                            <div class="flex items-center gap-x-4 text-xs">
-                                <time datetime="2020-03-16" class="text-gray-500">Mar 16, 2024</time>
-                                <button class="btn  rounded-full colorMain px-3 py-1.5 font-medium text-black">Erotico</button>
+
+                        <article class="col d-flex flex-column max-w-xl position-relative">
+                            <div class="d-flex align-items-center mb-2 small text-muted">
+                                <time datetime="2020-03-16" class="text-secondary">Mar 16, 2024</time>
+                            <button class="btn btn-yellow-700 ms-4 rounded-pill px-3 py-1">Erotico</button>
                             </div>
-                            <div class="group relative">
-                                <h3 class="mt-3 text-lg font-semibold leading-6 text-white-900 group-hover:text-white-600">
-                                    <a href="#">
-                                        <span class="absolute inset-0"></span>
+                            <div class="position-relative">
+                                <h3 class="mt-3 h5 font-weight-bold text-white">
+                                    <a href="#" class="text-decoration-none text-white">
                                         Accessori hot per serate indimenticabili
                                     </a>
                                 </h3>
-                                <p class="mt-5 line-clamp-3 text-sm leading-6 text-white-600">Per serate veramente memorabili, non puoi fare a meno delle nostre palline anali. Sono perfette per aggiungere un pizzico di avventura e intensificare il piacere. Un must-have per chi ama sperimentare.</p>
+                                <p class="mt-3 text-white">
+                                    Per serate veramente memorabili, non puoi fare a meno delle nostre palline anali. Sono perfette per aggiungere un pizzico di avventura e intensificare il piacere. Un must-have per chi ama sperimentare.
+                                </p>
                             </div>
-                            <div class="relative mt-8 flex items-center gap-x-4">
-                                <img src="https://avatars.githubusercontent.com/u/164747965?v=4" alt="" class="h-10 w-10 rounded-full bg-gray-50">
-                                <div class="text-sm leading-6">
-                                    <p class="font-semibold text-white-900">
-                                        <a href="https://github.com/BeatriceV96">
-                                            <span class="absolute inset-0"></span>
+                        <div class="d-flex align-items-center mt-4 position-absolute bottom-0">
+                            <img src="https://avatars.githubusercontent.com/u/164747965?v=4" alt="" class="imgScale rounded-circle bg-light">
+                            <div class="text-sm ms-3">
+                                    <p class="font-weight-bold text-white">
+                                        <a href="https://github.com/BeatriceV96" class="text-white text-decoration-none">
                                             Beatrice Vanvitelli
                                         </a>
                                     </p>
-                                    <p class="text-white-600">Co-Founder / CTO</p>
+                                <p class="text-light">Co-Founder / CTO</p>
                                 </div>
                             </div>
                         </article>
-                        <article class="flex max-w-xl flex-col items-start justify-between">
-                            <div class="flex items-center gap-x-4 text-xs">
-                                <time datetime="2020-03-16" class="text-gray-500">Mar 16, 2024</time>
-                                <button class="btn  rounded-full colorMain px-3 py-1.5 font-medium text-black">Erotico</button>
+
+                        <article class="col d-flex flex-column max-w-xl position-relative">
+                            <div class="d-flex align-items-center mb-2 small text-muted">
+                                <time datetime="2020-03-16" class="text-secondary">Mar 16, 2024</time>
+                            <button class="btn btn-yellow-700 ms-4 rounded-pill px-3 py-1">Erotico</button>
                             </div>
-                            <div class="group relative">
-                                <h3 class="mt-3 text-lg font-semibold leading-6 text-white-900 group-hover:text-white-600">
-                                    <a href="#">
-                                        <span class="absolute inset-0"></span>
+                            <div class="position-relative">
+                                <h3 class="mt-3 h5 font-weight-bold text-white">
+                                    <a href="#" class="text-decoration-none text-white">
                                         Intensifica il tuo piacere con i nuovi gadget
                                     </a>
                                 </h3>
-                                <p class="mt-5 line-clamp-3 text-sm leading-6 text-white-600">Se vuoi intensificare il tuo piacere, il nostro anello vibrante è una scelta eccellente. È progettato per aumentare la stimolazione e prolungare il divertimento. Un'aggiunta perfetta per le tue serate intime.</p>
+                                <p class="mt-3 text-white">
+                                    Se vuoi intensificare il tuo piacere, il nostro anello vibrante è una scelta eccellente. È progettato per aumentare la stimolazione e prolungare il divertimento. Un'aggiunta perfetta per le tue serate intime.
+                                </p>
                             </div>
-                            <div class="relative mt-8 flex items-center gap-x-4">
-                                <img src="https://avatars.githubusercontent.com/u/164791730?v=4" alt="" class="h-10 w-10 rounded-full bg-gray-50">
-                                <div class="text-sm leading-6">
-                                    <p class="font-semibold text-white-900">
-                                        <a href="https://github.com/AlessandroBianco00">
-                                            <span class="absolute inset-0"></span>
-                                           Alessandro Bianco
+                            <div class="d-flex align-items-center mt-4 position-absolute bottom-0">
+                            <img src="https://avatars.githubusercontent.com/u/164791730?v=4" alt="" class="imgScale rounded-circle bg-light">
+                            <div class="text-sm ms-3">
+                                    <p class="font-weight-bold text-white">
+                                        <a href="https://github.com/AlessandroBianco00" class="text-white text-decoration-none">
+                                            Alessandro Bianco
                                         </a>
                                     </p>
-                                    <p class="text-white-600">Co-Founder / CTO</p>
+                                    <p class="text-light">Co-Founder / CTO</p>
                                 </div>
                             </div>
                         </article>
+                        
                     </div>
                 </div>
             </div>
