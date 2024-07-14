@@ -84,7 +84,7 @@
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#createProduct">
             <div class="accordion-body">
-                @using (Html.BeginForm("AddProduct", "BackOffice", FormMethod.Post, new { id="addProductForm" }))
+                @using (Html.BeginForm("AddProduct", "BackOffice", FormMethod.Post, new { id = "addProductForm", enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.HiddenFor(model => model.NewProduct.ProductId, new {  id = "ProductId" })
@@ -114,7 +114,9 @@
                         @Html.TextBoxFor(model => model.NewProduct.ProductBrand, new { @class = "form-control", @id = "ProductBrand", @required = "required" })
                     </div>
                     <div id="imageUploadContainer">
-                        <input type="file" name="productImages" class="product-image-input" />
+                        <label for="productImages">Carica immagini:</label>
+                        <input type="file" name="productImages" class="product-image-input" multiple />
+
                     </div>
                     <button type="button" id="addMoreImages">+</button>
                     <div>

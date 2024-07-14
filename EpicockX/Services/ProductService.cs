@@ -113,8 +113,7 @@ namespace EpicockX.Services
                 )
                 {
                     conn.Open();
-                    const string INSERT_COMMAND =
-                        "INSERT INTO Products (ProductName, ProductDescription, ProductQuantity, ProductPrice, ProductCategory, ProductBrand) VALUES (@ProductName, @ProductDescription, @ProductQuantity, @ProductPrice, @ProductCategory, @ProductBrand)";
+                    const string INSERT_COMMAND = "INSERT INTO Products (ProductName, ProductDescription, ProductQuantity, ProductPrice, ProductCategory, ProductBrand) VALUES (@ProductName, @ProductDescription, @ProductQuantity, @ProductPrice, @ProductCategory, @ProductBrand); SELECT SCOPE_IDENTITY();";
                     using (SqlCommand cmd = new SqlCommand(INSERT_COMMAND, conn))
                     {
                         cmd.Parameters.AddWithValue("@ProductName", product.ProductName);
@@ -126,7 +125,11 @@ namespace EpicockX.Services
                         cmd.Parameters.AddWithValue("@ProductPrice", product.ProductPrice);
                         cmd.Parameters.AddWithValue("@ProductCategory", product.ProductCategory);
                         cmd.Parameters.AddWithValue("@ProductBrand", product.ProductBrand);
-                        cmd.ExecuteNonQuery();
+                        var result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            product.ProductId = Convert.ToInt32(result);
+                        }
                     }
                 }
             }
