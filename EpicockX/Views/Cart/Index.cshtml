@@ -23,11 +23,14 @@
                                     <img src="@product.ProductImages.FirstOrDefault()" alt="Alternate Text" />
                                 </div>
                                 <div class="text-end md:order-4 md:w-32">
-                                    <p class="text-base fw-bold">$@product.ProductPrice.ToString("N2")</p>
+                                    <p class="text-base fw-bold">@product.ProductPrice.ToString("C")</p>
                                 </div>
                             </div>
                             <div class="w-100 min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
+                                <div class="d-flex justify-content-between">
                                 <p class="text-base fw-medium text-decoration-none hover-underline">@product.ProductName</p>
+                                <p>Quantità: @product.ProductQuantity</p>
+                                </div>
                                 <p class="text-base fw-medium text-decoration-none hover-underline">@product.ProductDescription</p>
 
                                 <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-productId="@product.ProductId" asp-route-returnUrl="@Context.Request.Path" asp-route-quantity="1" class="btn btn-danger mt-2">Rimuovi dal carrello</a>
@@ -46,12 +49,19 @@
                         <div class="d-flex items-center justify-content-between gap-4 border-top border-gray-200 pt-2">
                             <div class="text-base fw-bold text-gray-900">Total</div>
                             <div>
-                                <div class="text-base fw-bold text-gray-900">$@Model.Sum(x => x.TotalPrice).ToString("N2")</div>
+                                <div class="text-base fw-bold text-gray-900">@Model.Sum(x => x.TotalPrice).ToString("C")</div>
                             </div>
                         </div>
                     </div>
                 </div>
+                @if (Model.Any())
+                {
+                    <div class="mt-4 d-flex justify-content-center">
+                        <a asp-controller="Cart" asp-action="Checkout" class="btn btn-success">Procedi al Checkout</a>
+                    </div>
+                }
             </div>
+            
         </div>
     </div>
 </section>

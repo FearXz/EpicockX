@@ -24,33 +24,47 @@
             </div>
             <div class="d-flex gap-3 gap-lg-4">
                 <a asp-action="Index" class="text-white fw-semibold">Homepage</a>
-                <a asp-controller="Home" asp-action="Catalog" class="text-white fw-semibold">Catalogo</a>
-                <a asp-controller="Cart" asp-action="Index" class="text-white fw-semibold">Carrello</a>  
-                <a asp-controller="BackOffice" asp-action="Index" class="text-white fw-semibold">Admin</a>
-                
+
+                @if (Context.User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="Home" asp-action="Catalog" class="text-white fw-semibold">Catalogo</a>
+                    <a asp-controller="Cart" asp-action="Index" class="text-white fw-semibold">Carrello</a>
+                    <a asp-controller="BackOffice" asp-action="Index" class="text-white fw-semibold">Admin</a>
+                }
+
+
             </div>
             <div class="d-lg-flex flex-lg-fill justify-content-end align-items-center">
-                <a asp-controller="Auth" asp-action="Index" class="text-white fw-semibold me-3">Login</a>
-                <button class="btn btnCart me-5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fas fa-shopping-cart"></i></button>
-                
-                </div>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel"> 
-                <div class="offcanvas-body p-0 m-0">
-                                <div class="p-4 border-bottom d-flex align-items-center justify-content-between bg-primary" id="colCartNav">
-                                    <div class="d-flex align-items-center">
-                                        <h2 class="h5 font-weight-bold text-white mb-0">IL TUO CARRELLO</h2>
-                                        <i class="fa-solid fa-credit-card ms-3 text-white" title="Pagamento con carta di credito"></i>
-                                        <i class="fa-solid fa-location-dot ms-3 text-white" title="Spedizione a domicilio"></i>
-                                        <i class="fa-solid fa-lock ms-3 text-white" title="Connessione sicura"></i>
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-column text-center vh-100 px-2" id="colCartFot">
-                            @await Component.InvokeAsync("Cart")
-                                </div>
-                           
+                @if (!Context.User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="Auth" asp-action="Index" class="text-white fw-semibold me-3">Login</a>
+                }
+                else
+                {
+                    <a asp-controller="Auth" asp-action="Logout" class="text-white fw-semibold me-3">Logout</a>
+                }
 
+
+                <button class="btn btnCart me-5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fas fa-shopping-cart"></i></button>
+
+            </div>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-body p-0 m-0">
+                    <div class="p-4 border-bottom d-flex align-items-center justify-content-between bg-primary" id="colCartNav">
+                        <div class="d-flex align-items-center">
+                            <h2 class="h5 font-weight-bold text-white mb-0">IL TUO CARRELLO</h2>
+                            <i class="fa-solid fa-credit-card ms-3 text-white" title="Pagamento con carta di credito"></i>
+                            <i class="fa-solid fa-location-dot ms-3 text-white" title="Spedizione a domicilio"></i>
+                            <i class="fa-solid fa-lock ms-3 text-white" title="Connessione sicura"></i>
                         </div>
-            
+                    </div>
+                    <div class="d-flex flex-column text-center vh-100 px-2" id="colCartFot">
+                        @await Component.InvokeAsync("Cart")
+                    </div>
+
+
+                </div>
+
             </div>
         </nav>
     </header>
@@ -65,47 +79,44 @@
 
         </main>
     </div>
-     
-      <footer id="footImg">
+
+    <footer id="footImg">
         <div class="container px-4 py-5" id="featured-3">
             <h2 class="pb-2 border-bottom">La fine di Epicock</h2>
             <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
                 <div class="feature col">
                     <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-                       
                     </div>
                     <h3 class="fs-2 ">Orgasmi perfetti ? <br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ↓ </h3>
                     <p>I tuoi orgasmi non soddisfano la tua feroce  <br />  bestia che ce in te ? allora clicca qui <br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ↓ </p>
                     <a href="#" class="icon-link">
                         &nbsp; &nbsp; &nbsp;  Scoprimi!
-                       
+
                     </a>
                 </div>
                 <div class="feature col">
                     <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-                       
                     </div>
                     <h3 class="fs-2 ">Chi siamo ?</h3>
                     <p>Dei semplici malati mentali STOP!</p>
                     <a href="#" class="icon-link">
                         Scoprici tutti !
-                       
+
                     </a>
                 </div>
                 <div class="feature col">
                     <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-                       
                     </div>
                     <h3 class="fs-2 ">Lavcora con noi ?</h3>
                     <p>Si ok ma senza soldi !</p>
                     <a href="#" class="icon-link">
                         Clicca qui !
-                       
+
                     </a>
                 </div>
             </div>
         </div>
-        </footer>
+    </footer>
 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -117,7 +128,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             const cartIcon = document.querySelector(".fa-shopping-cart");
             const cartModal = document.getElementById("cartModal");
-            
+
 
             cartIcon.addEventListener("click", function () {
                 cartModal.classList.add("active");

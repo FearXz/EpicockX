@@ -12,24 +12,26 @@
     <ul class="list-unstyled border-top">
         <li class="py-2 border-bottom">
             <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center justify-content-center">
                     <img src="#" alt="Product Image" class="h-10 w-10">
-                    <div class="ms-2">
-                        <p class="font-weight-bold text-gray-300 mb-0">@i.ProductName</p>
+                    <div class="ms-2 ">                    
                             <p class ="font-weight-bold text-gray-300 mb-0">
-                                @i.ProductQuantity</p>
-                        <p class="text-gray-400 mb-0">@i.ProductQuantity</p>
+                                Quantita': @i.ProductQuantity</p>
+                            <p class="font-weight-bold text-gray-300 mb-0">Nome: @i.ProductName</p>
                     </div>
                 </div>
-                <p class="font-weight-bold">@i.TotalPrice</p>
+                <p class="font-weight-bold">Prezzo: @i.TotalPrice</p>
             </div>
         </li>
         <!-- Aggiungi altri articoli qui -->
     </ul>
     }
-    <div class="d-flex justify-content-between align-items-center mt-4">
-        <p><span class="text-white">Totale:</span> <span class="text-white">@Model.Sum(p => p.TotalPrice) </span></p>
-        <button class="btn btn-success w-100">Procedi all'acquisto</button>
+    <div class="d-flex flex-column  align-items-center mt-4">
+        <p><span class="text-white">Totale:</span> <span class="text-white">@Model.Sum(p => p.TotalPrice).ToString("C")</span></p>
+
+        <form method="get" asp-controller="Cart" asp-action="Checkout">
+            <button type="submit" class="btn btn-success w-100">Procedi al Checkout</button>
+        </form>
     </div>
 }
 else

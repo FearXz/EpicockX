@@ -1,0 +1,17 @@
+﻿.form-group label {
+    display: block; 
+    text-align: center;
+
+}
+.text-danger {
+    display: block; 
+    text-align: center; 
+}
+main {
+    background-image: url(../assets/images/banner/SfondoIndex.jpg)
+}
+
+.btnColor {
+    background-color: #AF894A;
+    color: white;
+}
