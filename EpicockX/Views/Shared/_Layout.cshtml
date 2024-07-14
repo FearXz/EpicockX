@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -15,13 +16,11 @@
 </head>
 <body>
 
-    <header class="bg-white">
-        <nav class="container d-flex align-items-center justify-content-between py-3 px-3 px-lg-5 MainColor" aria-label="Global">
+
+    <header class="bg-white ">
+        <nav class="container-fluid d-flex align-items-center justify-content-between py-3 MainColor" aria-label="Global">
             <div class="d-flex flex-lg-fill">
-                <a href="#" class="p-2">
-                    <span class="sr-only">Your Company</span>
-                    <img class="h-12 w-auto" src="./assets/images/logo.jpg.jpg" alt="">
-                </a>
+                <img class="logoImage" src="./assets/images/logo.jpg" alt="Logo Epicock">
             </div>
             <div class="d-flex gap-3 gap-lg-4">
                 <a asp-action="Index" class="text-white fw-semibold">Homepage</a>
@@ -30,55 +29,49 @@
                 <a asp-controller="" asp-action="Cart" class="text-white fw-semibold">Cart</a>
             </div>
             <div class="d-lg-flex flex-lg-fill justify-content-lg-end">
-                <a href="#" class="text-white fw-semibold">
-                    <i class="fas fa-shopping-cart"></i>
-                </a>
+                <button class="btn btnCart" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fas fa-shopping-cart"></i></button>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel"> 
+                <div class="offcanvas-body p-0 m-0">
+                                <div class="p-4 border-bottom d-flex align-items-center justify-content-between bg-primary" id="colCartNav">
+                                    <div class="d-flex align-items-center">
+                                        <h2 class="h5 font-weight-bold text-white mb-0">IL TUO CARRELLO</h2>
+                                        <i class="fa-solid fa-credit-card ms-3 text-white" title="Pagamento con carta di credito"></i>
+                                        <i class="fa-solid fa-location-dot ms-3 text-white" title="Spedizione a domicilio"></i>
+                                        <i class="fa-solid fa-lock ms-3 text-white" title="Connessione sicura"></i>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column text-center vh-100 px-2" id="colCartFot">
+                                    <!-- Contenuto del carrello -->
+                                    <p class="text-center p-3 text-white">Prodotti selezionati da acquistare</p>
+                                    <ul class="list-unstyled border-top">
+                                        <li class="py-2 border-bottom">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="https://via.placeholder.com/40" alt="Product Image" class="h-10 w-10">
+                                                    <div class="ms-2">
+                                                        <p class="font-weight-bold text-gray-300 mb-0">Nome Prodotto</p>
+                                                        <p class="text-gray-400 mb-0">Quantità: 1</p>
+                                                    </div>
+                                                </div>
+                                                <p class="font-weight-bold">€ 10.00</p>
+                                            </div>
+                                        </li>
+                                        <!-- Aggiungi altri articoli qui -->
+                                    </ul>
+
+                                    <div class="d-flex justify-content-between align-items-center mt-4">
+                                        <p><span class="text-white">Totale:</span> <span class="text-white">€ 10.00</span></p>
+                                        <button class="btn btn-success w-100">Procedi all'acquisto</button>
+                                    </div>
+                                </div>
+                           
+
+                        </div>
+            
             </div>
         </nav>
     </header>
-
-
-
-    <!-- Modale del carrello -->
-    <div id="cartModal" class="fixed inset-0 flex items-center justify-end z-50 hidden">
-        <div class="absolute inset-0 bg-gray-800 opacity-50"></div>
-        <div class="relative bg-white w-1/3 h-full shadow-lg">
-            <div class="p-4 border-b flex items-center justify-between bg-blue-600" id="colCartNav">
-                <div class="flex items-center gap-2">
-                    <h2 class="text-xl font-semibold text-white">IL TUO CARRELLO</h2>
-                    <i class="fa-solid fa-credit-card ms-5 text-white" title="Pagamento con carta di credito"></i>
-                    <i class="fa-solid fa-location-dot ms-5 text-white" title="Spedizione a domicilio"></i>
-                    <i class="fa-solid fa-lock ms-5 text-white" title="Connessione sicura"></i>
-                </div>
-                <button id="closeCart" class="text-gray-600 hover:text-gray-900">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="p-4 flex flex-col-reverse" id="colCartFot">
-                <!-- Contenuto del carrello -->
-                <p class="text-center p-3 text-white">Prodotti selezionati da acquistare</p>
-                <ul class="divide-y divide-gray-300">
-                    <li class="py-2">
-                        <div class="flex justify-between items-center">
-                            <div class="flex items-center gap-2">
-                                <img src="https://via.placeholder.com/40" alt="Product Image" class="h-10 w-10">
-                                <div>
-                                    <p class="font-semibold text-gray-300">Nome Prodotto</p>
-                                    <p class="text-gray-400">Quantità: 1</p>
-                                </div>
-                            </div>
-                            <p class="font-semibold">€ 10.00</p>
-                        </div>
-                    </li>
-                    <!-- Aggiungi altri articoli qui -->
-                </ul>
-                <div class="flex justify-between items-center mt-4">
-                    <p><span class="text-white">Totale:</span> <span class="text-white">€ 10.00</span></p>
-                    <button class="w-50 text-white p-2 bg-green-500 hover:bg-green-600 rounded-md">Procedi all'acquisto</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <div class="grid grid-cols-1">
@@ -138,14 +131,10 @@
         document.addEventListener("DOMContentLoaded", function () {
             const cartIcon = document.querySelector(".fa-shopping-cart");
             const cartModal = document.getElementById("cartModal");
-            const closeCart = document.getElementById("closeCart");
+            
 
             cartIcon.addEventListener("click", function () {
                 cartModal.classList.add("active");
-            });
-
-            closeCart.addEventListener("click", function () {
-                cartModal.classList.remove("active");
             });
 
             cartModal.addEventListener("click", function (event) {

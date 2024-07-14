@@ -29,6 +29,18 @@ h1{
 
 .MainColor {
     background-color: #1D1E22;
+
+}
+a {
+    
+    text-decoration: none;
+}
+.logoImage {
+    width: 80px;
+}
+
+.btnCart {
+    background-color: #BF9A5C;
 }
 
 /*----------------------ABOUT US--------------------*/
@@ -152,6 +164,7 @@ h2 {
 #cartModal {
     height: 0vh;
     display: none;
+
 }
 
     #cartModal.active {
@@ -160,29 +173,19 @@ h2 {
 
 
 #colCartNav {
-    margin-left: 10em;
-    height: 10vh;
-    width: 50vh;
+
     background-image: url(../assets/images/banner_AboutUs/wallpaper_01.jpg);
 }
 
-    #colCartNav img {
-        height: 2rem;
-        width: 2rem;
-    }
-
-#colCartFot {
-    width: 50vh;
+  
+#colCartFot {  
     background-image: url(../assets/images/banner/footer.jpg);
-    height: 90vh;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     color: white;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
-    margin-bottom: 20px;
-    margin-left: 10em;
 }
 
 .rounded-lg {
