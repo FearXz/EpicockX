@@ -5,8 +5,6 @@ main {
 
 .wrapper {
     position: relative;
-   margin-top: 20px;
-   margin-bottom: 20px;
     width: 400px;
     height: 500px;
     background: #000;
@@ -14,6 +12,7 @@ main {
     border-radius: 20px;
     padding: 40px;
     overflow: hidden;
+    margin: 20px auto 20px auto;
 }
 
     .wrapper:hover {
