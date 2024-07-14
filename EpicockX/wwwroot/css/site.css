@@ -208,13 +208,7 @@ h2 {
 
 /*----------------------Catalog--------------------*/
 
-.product_card {
-    border: 2px solid black; 
-    padding: 1rem; 
-    border-radius: 0.5rem; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-    position: relative; 
-}
+
 
 .discount-badge {
     position: absolute;
@@ -299,4 +293,27 @@ h2 {
     background-color : black; 
     margin-bottom: -23px;
 }
+
+
+/*----------------------Footer--------------------*/
+
+#footImg {
+    background-image: url(../assets/images/banner/footer.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+#footImg a {
+    color: white;
+}
+
+#footImg a:hover {
+    color: #bf9a5c;
+}
+
 

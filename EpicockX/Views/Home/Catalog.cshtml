@@ -2,7 +2,6 @@
 @model IEnumerable<EpicockX.Models.Product>
 @{
     ViewData["Title"] = "Catalog";
-    var images = (IEnumerable<EpicockX.Models.ProductImage>)ViewBag.Images;
 }
 <style>
     .mainColor {
@@ -10,56 +9,57 @@
     }
 </style>
 
-<div class="flex mainColor text-white border-r border-2 border-black">
+<div class="d-flex bg-dark text-white border-end border-2 border-black">
 
-    <aside class="w-1/4 p-4 border-r-2 border-black m-0">
-        <h2 class="font-bold text-lg mb-4">Sex Toys for Women</h2>
+    <aside class="w-25 p-4 border-end-2 border-black m-0">
+        <h2 class="fw-bold fs-4 mb-4">Sex Toys for Women</h2>
         <ul class="mb-8">
-            <li><a href="@Url.Action("Catalog", new { category = "all" })" class="block py-2">View all products</a></li>
-            <li><a href="@Url.Action("Catalog", new { category = "ForHer" })" class="block py-2">View products for Her</a></li>
-            <li><a href="@Url.Action("Catalog", new { category = "ForHim" })" class="block py-2">View products for Him</a></li>
-            <li><a href="@Url.Action("Catalog", new { category = "ForBoth" })" class="block py-2">View products for Both</a></li>
+            <li><a href="@Url.Action("Catalog", new { category = "all" })" class="d-block py-2 text-yellow-700">View all products</a></li>
+            <li><a href="@Url.Action("Catalog", new { category = "ForHer" })" class="d-block py-2 text-yellow-700">View products for Her</a></li>
+            <li><a href="@Url.Action("Catalog", new { category = "ForHim" })" class="d-block py-2 text-yellow-700">View products for Him</a></li>
+            <li><a href="@Url.Action("Catalog", new { category = "ForBoth" })" class="d-block py-2 text-yellow-700">View products for Both</a></li>
         </ul>
     </aside>
 
 
     <!-- Sezione principale per i prodotti -->
-    <main class="w-3/4 p-4 bg-dark">
-        <div class="flex justify-between items-center mb-4">
-            <h1 class="text-3xl font-bold">I nostri Sex Toys</h1>
+    <main class="w-75 p-4 bg-dark">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="fs-1 fw-bold">I nostri Sex Toys</h1>
             <div>
-                <span class="text-sm">@Model.Count() results</span>
-                <select class="ml-4 p-2 border text-black">
+                <span class="fs-6">@Model.Count() results</span>
+                <select class="ms-4 p-2 border text-dark">
                     <option value="asc">Order by: Ascending</option>
                     <option value="desc">Order by: Descending</option>
                 </select>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 relative">
-            @foreach (var product in Model)
-            {
-                <div class="product_card relative">
-                    @foreach (var image in images.Where(img => img.ProductId == product.ProductId))
-                    {
-                        <img src="@image.ProductImageUrl" class="w-full h-48 object-cover mb-4">
-                    }
-                    <h2 class="text-xl font-semibold mb-2">@product.ProductName</h2>
-                    <p class="text-white-700 mb-2">@product.ProductDescription</p>
-                    <div class="flex items-center justify-between mb-4">
-                        <p class="text-white-900 font-bold">€@product.ProductPrice</p>
+       <div class="row g-3 p-2">
+    @foreach (var product in Model)
+    {
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch">
+            <div class="card w-100 position-relative">
+                @foreach (var image in product.ProductImages)
+                {
+                    <img src="@image" class="card-img-top h-48 object-cover">
+                }
+                <div class="card-body d-flex flex-column bg-black ">
+                    <h2 class="card-title fs-4 fw-semibold mb-2 text-light">@product.ProductName</h2>
+                    <p class="card-text text-light mb-2 ">@product.ProductDescription</p>
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <p class="text-white fw-bold">€@product.ProductPrice</p>
                     </div>
-
-                    <button class="button mt-auto w-full absolute bottom-0 left-0">
-                        <span class="button-content no-wrap">
-                            <a href="@Url.Action("Details", new { id = product.ProductId })" class="text-white block text-center">
-                                Visualizza Dettagli
-                            </a>
-                        </span>
-                    </button>
-                </div>
-            }
+                            <button class="button mt-auto w-75 position-absolute bottom-0 start-50 translate-middle-x mb-2">
+                                <span class="button-content no-wrap">
+                                    <a href="@Url.Action("Details", new { id = product.ProductId })" class="btn text-light w-100">Visualizza Dettagli</a>
+                                </span>
+                            </button>
+            </div>
         </div>
+                </div>
+    }
+    </div>
     </main>
 
 </div>
@@ -67,10 +67,7 @@
 @section Scripts
 {
     <script src="./lib/tailwindcss/tailwind.css"></script>
-
+}
 
 
    
-
-
-}

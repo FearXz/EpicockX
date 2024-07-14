@@ -1,7 +1,7 @@
-﻿using EpicockX.Models;
+﻿using System.Security.Claims;
+using EpicockX.Models;
 using EpicockX.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace EpicockX.Controllers
 {
@@ -41,7 +41,6 @@ namespace EpicockX.Controllers
             }
             var cart = _cartSvc.GetCart();
             var userId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
-
             var session = _cartSvc.CreateCheckoutSession(cart);
             order.SessionId = session.Id;
             var orderId = _cartSvc.SubmitOrder(order, userId, cart);
@@ -49,12 +48,6 @@ namespace EpicockX.Controllers
             Response.Headers.Add("Location", session.Url);
 
             return Redirect(session.Url);
-        }
-
-        public IActionResult Result(int orderId, int userId)
-        {
-            var resultOrder = _cartSvc.GetResultOrder(orderId, userId);
-            return View(resultOrder);
         }
 
         public IActionResult AddToCart(int id, string returnUrl)
@@ -90,9 +83,9 @@ namespace EpicockX.Controllers
             return View();
         }
 
-        public IActionResult Success(string SessionId)
+        public IActionResult Success(string session_id)
         {
-            return View();
+            return View(_cartSvc.GetResultOrder(session_id));
         }
     }
 }
