@@ -45,7 +45,7 @@ namespace EpicockX.Services
                                 product.ProductBrand = reader.GetString(6);
                                 product.ProductImage = reader.GetString(7);
                                 product.ProductImages =
-                                    product.ProductImage != null
+                                     String.IsNullOrEmpty(product.ProductImage) == false
                                         ? product.ProductImage.Split('?').ToList()
                                         : new List<string>();
                                 products.Add(product);
