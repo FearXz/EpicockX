@@ -9,7 +9,7 @@
         public decimal ProductPrice { get; set; }
         public string ProductCategory { get; set; }
         public string ProductBrand { get; set; }
-        public List<string> ProductImages { get; set; }
+        public List<string> ProductImages { get; set; } = new List<string>();
         public string? ProductImage
         {
             get => ProductImage;
