@@ -26,7 +26,9 @@ namespace EpicockX.Services
                 )
                 {
                     conn.Open();
-                    const string SELECT_ALL_COMMAND = "SELECT * FROM Products";
+                    const string SELECT_ALL_COMMAND =
+                        "SELECT p.ProductId, p.ProductName, p.ProductDescription, p.ProductQuantity, p.ProductPrice, p.ProductCategory, p.ProductBrand, STRING_AGG(pi.ProductImageUrl, '?') AS ProductImages FROM Products AS p INNER JOIN ProductImages AS pi ON p.ProductId = pi.ProductId GROUP BY p.ProductId, p.ProductName, p.ProductDescription, p.ProductQuantity, p.ProductPrice, p.ProductCategory, p.ProductBrand";
+
                     using (SqlCommand cmd = new SqlCommand(SELECT_ALL_COMMAND, conn))
                     {
                         using (SqlDataReader reader = cmd.ExecuteReader())
@@ -41,6 +43,7 @@ namespace EpicockX.Services
                                 product.ProductPrice = reader.GetDecimal(4);
                                 product.ProductCategory = reader.GetString(5);
                                 product.ProductBrand = reader.GetString(6);
+                                product.ProductImage = reader.GetString(7);
                                 products.Add(product);
                             }
                         }
