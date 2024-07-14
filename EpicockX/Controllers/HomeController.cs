@@ -69,7 +69,25 @@ namespace EpicockX.Controllers
 
         public IActionResult Catalog(string category = "all")
         {
-            var products = _productSvc.GetProducts();
+            IEnumerable<Product> products;
+
+            switch (category)
+            {
+                case "ForHer":
+                    products = _productSvc.GetProducts().Where(p => p.ProductCategory == "ForHer");
+                    break;
+                case "ForHim":
+                    products = _productSvc.GetProducts().Where(p => p.ProductCategory == "ForHim");
+                    break;
+                case "ForBoth":
+                    products = _productSvc.GetProducts().Where(p => p.ProductCategory == "ForBoth");
+                    break;
+                case "all":
+                default:
+                    products = _productSvc.GetProducts();
+                    break;
+            }
+
             return View(products);
         }
 
