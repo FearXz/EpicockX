@@ -15,10 +15,6 @@
             get => ProductImage;
             set
             {
-                if (ProductImages == null)
-                {
-                    ProductImages = new List<string>();
-                }
                 ProductImage = value != null ? value : "";
                 ProductImages = ProductImage.Split('?').ToList();
             }
