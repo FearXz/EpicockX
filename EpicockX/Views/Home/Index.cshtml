@@ -4,28 +4,29 @@
 
 @{
     ViewData["Title"] = "Home Page";
-   var images = (IEnumerable<EpicockX.Models.ProductImage>)ViewBag.Images;
 }
 
 
 <!-- Modale Promozionale -->
-<div id="promoModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-    <div class="absolute inset-0 bg-gray-800 opacity-50"></div>
-    <div class="relative bg-white w-1/3 h-auto shadow-lg rounded-lg overflow-hidden">
-        <div class="p-4 flex items-center justify-between bg-blue-600 rounded-t-lg " id="scontoHd">
-            <h2 class="text-xl font-semibold text-white mx-auto">Promozione Speciale!</h2>
-            <button id="closePromo" class="text-gray-600 hover:text-gray-900">
+<div id="promoModal" class="position-fixed d-flex align-items-center justify-content-center w-100 h-100 top-0 start-0" style="z-index: 1050; background-color: rgba(33, 37, 41, 0.5);">
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark" style="opacity: 0.5;"></div>
+    <div class="position-relative bg-white rounded-5 overflow-hidden" style="margin: auto;">
+        <div class="p-4 d-flex align-items-center justify-content-between bg-dark rounded-top" id="scontoHd">
+            <h2 class="fw-bold text-white">Promozione Speciale!</h2>
+            <button id="closePromo" class="text-secondary">
                 <i class="fas fa-times text-white"></i>
             </button>
         </div>
-        <iframe src="https://www.youtube.com/embed/sdlV_Z06R8U?autoplay=1" allow="autoplay" class="w-full" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/sdlV_Z06R8U?autoplay=1" allow="autoplay" class="w-100" frameborder="0" allowfullscreen></iframe>
         <div id="alert">
-            <p class=" text-center text-xl">Approfitta della nostra offerta speciale!</p>
-            <p class="mt-1 p-0 pt-3 text-center text-sm">Scopri la nostra promozione 69% di sconto per i nuovi arrivati</p>
-            <p class="mt-1 pb-3 p-0 text-center text-sm">90% per chi già è esperto nel nostro sito</p>
+            <p class="text-center m-0 p-0">Approfitta della nostra offerta speciale!</p>
+            <p class="mt-1 p-0 mb-0 pt-3 text-center">Scopri la nostra promozione 69% di sconto per i nuovi arrivati</p>
+            <p class="m-0 pb-3 text-center">90% per chi già è esperto nel nostro sito</p>
         </div>
     </div>
 </div>
+
+
 <div class=" text-white bgIndex">
     <div class="relative">
         <img src="~/assets/images/banner/index.jpg" alt="Banner Logo" class="w-full" />
@@ -51,13 +52,13 @@
                 @foreach (var product in Model.Take(4))
                 {
                     <div class="card" data-content="@product.ProductName">
-                        @foreach (var image in images.Where(img => img.ProductId == product.ProductId))
+                        @foreach (var image in Model.Take(1))
                         {
                             <div class="first-content">
-                                <img src="@image.ProductImageUrl" alt="Immagine del prodotto" class="w-full h-full" />
+                                <img src="@image.ProductImages" alt="Immagine del prodotto" class="w-full h-full" />
                             </div>
                             <div class="second-content flex-column">
-                                <img src="@image.ProductImageUrl" alt="Immagine del prodotto" class="w-full h-full" />
+                                <img src="@image.ProductImages" alt="Immagine del prodotto" class="w-full h-full" />
                                 <p>@product.ProductName</p>
                                 
                             </div>
@@ -294,10 +295,12 @@
 
 
  @section Scripts {
-     
-    <script src="./lib/tailwindcss/tailwind.css"> </script>
 
     <script>
+            document.getElementById("closePromo").addEventListener("click", function () {
+                document.getElementById("promoModal").style.visibility = "hidden";
+            });
+ 
         function isInViewport(element) {
             const rect = element.getBoundingClientRect();
             return (
