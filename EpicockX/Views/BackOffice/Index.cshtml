@@ -4,14 +4,14 @@
 }
 
 <style>
-    /* Modal Custom Styles */
-    #deleteModal {
-        display: none;
-    }
+ /* Modal Custom Styles */
+ #deleteModal {
+ display: none;
+ }
 
-        #deleteModal.show {
-            display: block;
-        }
+ #deleteModal.show {
+ display: block;
+ }
 </style>
 
 <div class="accordion" id="productsAccordion">
@@ -55,10 +55,10 @@
                                     <td>@product.ProductCategory</td>
                                     <td>@product.ProductBrand</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-sm" onclick="editProduct(@product.ProductId, '@product.ProductName', '@product.ProductDescription', @product.ProductQuantity, @product.ProductPrice, '@product.ProductCategory', '@product.ProductBrand')">
+                                        <button type="button" class="btn btn-primary btn-sm btnUpdate" data-id="@product.ProductId" data-name="@product.ProductName" data-description="@product.ProductDescription" data-quantity="@product.ProductQuantity" data-price="@product.ProductPrice" data-category="@product.ProductCategory" data-brand="@product.ProductBrand">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(@product.ProductId)">
+                                        <button  type="button" class="btn btn-danger btn-sm btnDelete" data-id="@product.ProductId">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </td>
@@ -118,7 +118,7 @@
     <div class="accordion-item hidden" id="updateProduct">
         <h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                <span id="accordionTitle">#2 Aggiungi un nuovo prodotto</span>
+                <span id="accordionTitle">#2 Modifica un prodotto esistente</span>
             </button>
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#updateProduct">
@@ -210,62 +210,6 @@
 </div>
 
 @section Scripts {
-    <script>
-        function editProduct(id, name, description, quantity, price, category, brand) {
+    <script src="~/js/BackOfficeIndex.js"></script>
 
-            // Nascondi il form di creazione e mostra quello di update
-            document.getElementById('createProduct').classList.add('hidden');
-            document.getElementById('updateProduct').classList.remove('hidden');
-
-            // Seleziona il form di update tramite il suo ID
-            var updateForm = document.getElementById('updateProductForm');
-
-            // Popola i campi del form di update con i dati del prodotto
-            document.getElementById('ProductId').value = id;
-            document.getElementById('ProductName').value = name;
-            document.getElementById('ProductDescription').value = description;
-            document.getElementById('ProductQuantity').value = quantity;
-            document.getElementById('ProductPrice').value = price;
-            document.getElementById('ProductCategory').value = category;
-            document.getElementById('ProductBrand').value = brand;
-
-            // Gestione dell'apertura e chiusura degli accordion
-            let collapseOne = new bootstrap.Collapse(document.getElementById('collapseOne'), { toggle: false });
-            let collapseThree = new bootstrap.Collapse(document.getElementById('collapseThree'), { toggle: true });
-
-            // Scroll verso l'accordion del form
-            document.getElementById('collapseThree').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        function confirmDelete(id) {
-
-
-        }
-
-        function confirmDelete(productId) {
-            // Imposta l'ID del prodotto nel campo nascosto del form
-            document.getElementById('deleteProductId').value = productId;
-
-            // Mostra il modale
-            $('#deleteModal').modal('show');
-        }
-
-        function closeDeleteModal() {
-            $('#deleteModal').modal('hide');
-        }
-
-        // Associa la chiusura del modale ai bottoni di chiusura e annulla
-        document.addEventListener('DOMContentLoaded', function () {
-            // Chiudi il modale quando si clicca sulla X
-            document.querySelectorAll('[data-dismiss="modal"]').forEach(function (element) {
-                element.addEventListener('click', function () {
-                    closeDeleteModal();
-                });
-            });
-
-            // Chiudi il modale quando si clicca su Annulla
-            document.getElementById('closeModalButton').addEventListener('click', closeDeleteModal);
-        });
-
-    </script>
 }
