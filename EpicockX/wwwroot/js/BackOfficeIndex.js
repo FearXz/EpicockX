@@ -85,4 +85,13 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#cancelDelete").click(function () {
     closeDeleteModal();
   });
+
+  $(document).ready(function () {
+    $("#addMoreImages").click(function (e) {
+      e.preventDefault();
+      $("#imageUploadContainer").append(
+        '<input type="file" name="productImages" class="product-image-input" />'
+      );
+    });
+  });
 });

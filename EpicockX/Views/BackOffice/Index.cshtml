@@ -113,6 +113,10 @@
                         @Html.LabelFor(model => model.NewProduct.ProductBrand, new { @class = "block text-sm font-medium text-gray-700" })
                         @Html.TextBoxFor(model => model.NewProduct.ProductBrand, new { @class = "form-control", @id = "ProductBrand", @required = "required" })
                     </div>
+                    <div id="imageUploadContainer">
+                        <input type="file" name="productImages" class="product-image-input" />
+                    </div>
+                    <button type="button" id="addMoreImages">+</button>
                     <div>
                         <input type="submit" id="formButton" value="Aggiungi prodotto" class="btn btn-primary" />
                     </div>
