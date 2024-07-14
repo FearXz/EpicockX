@@ -1,4 +1,5 @@
-﻿using EpicockX.Models;
+﻿using System.Data;
+using EpicockX.Models;
 using Microsoft.Data.SqlClient;
 using Newtonsoft.Json;
 using Stripe.Checkout;
@@ -130,6 +131,7 @@ namespace EpicockX.Services
                                 }
                             }
                             transaction.Commit();
+                            transaction.Dispose();
                         }
                         catch (Exception ex)
                         {
@@ -146,7 +148,7 @@ namespace EpicockX.Services
             }
         }
 
-        public ResultOrderDto GetResultOrder(int orderId, int userId)
+        public ResultOrderDto GetResultOrder(string sessionId)
         {
             ResultOrderDto resultOrder = new ResultOrderDto();
             try
@@ -162,23 +164,18 @@ namespace EpicockX.Services
                     {
                         try
                         {
-                            const string SELECT_ALL_COMMAND =
-                            "SELECT Orders.OrderId"
-                            + "STRING_AGG(CONCAT(OrderProducts.Quantity, 'x ', Products.ProductName, ''), ', ')"
-                            + "FROM Orders"
-                            + "JOIN OrderProducts ON Orders.OrderId = OrderProducts.OrderId"
-                            + "JOIN Products ON OrderProducts.ProductId = Products.ProductId"
-                            + "WHERE Orders.UserId = @userId AND Orders.OrderId = @orderId"
-                            + "GROUP BY Orders.OrderId";
-                            using (SqlCommand cmd = new SqlCommand(SELECT_ALL_COMMAND, conn))
+                            using (
+                                SqlCommand cmd = new SqlCommand("setPagamento", conn, transaction)
+                            )
                             {
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.AddWithValue("@SessionId", sessionId);
                                 using (SqlDataReader reader = cmd.ExecuteReader())
                                 {
                                     while (reader.Read())
                                     {
                                         resultOrder.OrderId = reader.GetInt32(0);
-                                        resultOrder.ProductName = reader.GetString(1);
-                                        resultOrder.Quantity = reader.GetString(2);
+                                        resultOrder.ProductList = reader.GetString(1);
                                     }
                                 }
                             }
