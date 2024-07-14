@@ -16,28 +16,27 @@
 
 
     <header class="bg-white">
-        <nav class="mx-auto flex items-center justify-between p-6 lg:px-8 MainColor" aria-label="Global">
-            <div class="flex lg:flex-1">
-                <a href="#" class="-m-1.5 p-1.5">
+        <nav class="container d-flex align-items-center justify-content-between py-3 px-3 px-lg-5 MainColor" aria-label="Global">
+            <div class="d-flex flex-lg-fill">
+                <a href="#" class="p-2">
                     <span class="sr-only">Your Company</span>
                     <img class="h-12 w-auto" src="./assets/images/logo.jpg.jpg" alt="">
                 </a>
             </div>
-            <div class=" flex gap-x-5 lg:gap-x-12">
-                <a asp-action="Index" class="text-sm font-semibold leading-6 text-white">Homepage</a>
-                <a asp-controller="Home" asp-action="Catalog" class="text-sm font-semibold leading-6 text-white">Catalogo</a>
-
-                <a asp-controller="BackOffice" asp-action="Index" class="text-sm font-semibold leading-6 text-white">Admin</a>
-                <a asp-controller="" asp-action="Cart" class="text-sm font-semibold leading-6 text-white">Cart</a>
-
+            <div class="d-flex gap-3 gap-lg-4">
+                <a asp-action="Index" class="text-white fw-semibold">Homepage</a>
+                <a asp-controller="Home" asp-action="Catalog" class="text-white fw-semibold">Catalogo</a>
+                <a asp-controller="BackOffice" asp-action="Index" class="text-white fw-semibold">Admin</a>
+                <a asp-controller="" asp-action="Cart" class="text-white fw-semibold">Cart</a>
             </div>
-            <div class=" lg:flex lg:flex-1 lg:justify-end">
-                <a href="#" class="text-sm font-semibold leading-6 text-white">
+            <div class="d-lg-flex flex-lg-fill justify-content-lg-end">
+                <a href="#" class="text-white fw-semibold">
                     <i class="fas fa-shopping-cart"></i>
                 </a>
             </div>
         </nav>
     </header>
+
 
 
     <!-- Modale del carrello -->
