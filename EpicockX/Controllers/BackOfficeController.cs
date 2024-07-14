@@ -27,27 +27,37 @@ namespace EpicockX.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddOrUpdateProduct(Product newProduct)
+        public IActionResult AddProduct(Product product)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                if (newProduct.ProductId == 0)
+                var viewModelValid = new BackOfficeIndexViewModel
                 {
-                    _productSvc.AddProduct(newProduct);
-                }
-                else
-                {
-                    _productSvc.UpdateProduct(newProduct);
-                }
-                return RedirectToAction("Index");
+                    Products = _productSvc.GetProducts(),
+                    NewProduct = product
+                };
+                return View("Index", viewModelValid);
             }
 
-            var viewModel = new BackOfficeIndexViewModel
+            _productSvc.AddProduct(product);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPut]
+        public IActionResult UpdateProduct(Product product)
+        {
+            if (!ModelState.IsValid)
             {
-                Products = _productSvc.GetProducts(),
-                NewProduct = newProduct
-            };
-            return View("Index", viewModel);
+                var viewModelValid = new BackOfficeIndexViewModel
+                {
+                    Products = _productSvc.GetProducts(),
+                    NewProduct = product
+                };
+                return View("Index", viewModelValid);
+            }
+
+            _productSvc.UpdateProduct(product);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

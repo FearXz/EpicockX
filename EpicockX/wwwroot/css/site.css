@@ -294,3 +294,26 @@ h2 {
     margin-bottom: -23px;
 }
 
+
+/*----------------------Footer--------------------*/
+
+#footImg {
+    background-image: url(../assets/images/banner/footer.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+#footImg a {
+    color: white;
+}
+
+#footImg a:hover {
+    color: #bf9a5c;
+}
+
+
