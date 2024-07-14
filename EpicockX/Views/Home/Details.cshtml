@@ -1,5 +1,5 @@
 ﻿@using EpicockX.Models
-@model Product
+@model EpicockX.Models.Product
 
 
 <link rel="stylesheet" href="~/css/Details.css" />
@@ -66,31 +66,26 @@
 
 <div class="container py-10 ">
     <div class="card custom-card w-50 mx-auto  border-0">
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-            <ol class="carousel-indicators">
-                @for (int i = 0; i < Model.ProductImages.Count; i++)
-                {
-                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
-                }
-            </ol>
+        <!-- Inizio Carosello -->
+        <div id="productCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-                @foreach (var i in Model.ProductImages)
+                @foreach (var image in Model.ProductImages)
                 {
-                    <div class="carousel-item">
-                        <img src="@i" class="d-block w-100 carousel-img" alt="Product Image @(i + 1)">
+                    <div class="carousel-item @(image == Model.ProductImages.First() ? "active" : "")">
+                        <img src="@image" class="d-block w-100 carousel-img" alt="...">
                     </div>
                 }
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="sr-only">Precedente</span>
+            </a>
+            <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+                <span class="sr-only">Successivo</span>
+            </a>
         </div>
-
+        <!-- Fine Carosello -->
         <div class="card-body text-center bg-dark text-white p-4">
             <h5 class="card-title fs-4">@Model.ProductName</h5>
             <p class="card-text">@Model.ProductDescription</p>
@@ -99,7 +94,7 @@
                 <li class="list-group-item border-0">Marca: @Model.ProductBrand</li>
                 <li class="list-group-item border-0">
                     Quantità:
-                        <input id="quantityInput" type="number" class="form-control" value="1" min="1" max="10">
+                    <input id="quantityInput" type="number" class="form-control" value="1" min="1" max="10">
                 </li>
                 <li class="list-group-item border-0">Prezzo: @Model.ProductPrice.ToString("C")</li>
             </ul>
@@ -107,6 +102,7 @@
         </div>
     </div>
 </div>
+
 
 
 

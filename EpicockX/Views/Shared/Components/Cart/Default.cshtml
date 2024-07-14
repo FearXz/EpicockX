@@ -1,4 +1,4 @@
-﻿@model List<Product> 
+﻿@model List<Product>
 
 @{
     Layout = null;
@@ -8,23 +8,25 @@
 {
     <div>Articoli nel carrello: @Model.Count</div>
     <p class="text-center p-3 text-white">Prodotti selezionati da acquistare</p>
-    @foreach (var i in Model) {
-    <ul class="list-unstyled border-top">
-        <li class="py-2 border-bottom">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center justify-content-center">
-                    <img src="#" alt="Product Image" class="h-10 w-10">
-                    <div class="ms-2 ">                    
-                            <p class ="font-weight-bold text-gray-300 mb-0">
-                                Quantita': @i.ProductQuantity</p>
+    @foreach (var i in Model)
+    {
+        <ul class="list-unstyled border-top">
+            <li class="py-2 border-bottom">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div class="ms-2 ">
                             <p class="font-weight-bold text-gray-300 mb-0">Nome: @i.ProductName</p>
+                            <p class="font-weight-bold text-gray-300 mb-0">
+                                Quantita': @i.ProductQuantity
+                            </p>
+                            
+                        </div>
                     </div>
+                    <p class="font-weight-bold">Prezzo: @i.TotalPrice</p>
                 </div>
-                <p class="font-weight-bold">Prezzo: @i.TotalPrice</p>
-            </div>
-        </li>
-        <!-- Aggiungi altri articoli qui -->
-    </ul>
+            </li>
+            <!-- Aggiungi altri articoli qui -->
+        </ul>
     }
     <div class="d-flex flex-column  align-items-center mt-4">
         <p><span class="text-white">Totale:</span> <span class="text-white">@Model.Sum(p => p.TotalPrice).ToString("C")</span></p>
@@ -38,4 +40,3 @@ else
 {
     <div>Il carrello è vuoto.</div>
 }
-    
