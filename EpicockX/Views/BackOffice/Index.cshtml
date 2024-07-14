@@ -12,6 +12,11 @@
  #deleteModal.show {
  display: block;
  }
+
+.hidden {
+    display: none !important;
+}
+
 </style>
 
 <div class="accordion" id="productsAccordion">
@@ -22,7 +27,7 @@
                 #1 Prodotti esistenti
             </button>
         </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#getProducts">
+        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#getProducts">
             <div class="accordion-body">
                 @if (Model.Products == null || !Model.Products.Any())
                 {
@@ -79,9 +84,10 @@
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#createProduct">
             <div class="accordion-body">
-                @using (Html.BeginForm("AddProduct", "BackOffice", FormMethod.Post))
+                @using (Html.BeginForm("AddProduct", "BackOffice", FormMethod.Post, new { id="addProductForm" }))
                 {
-                    @Html.HiddenFor(model => model.NewProduct.ProductId, new {  @id = "ProductId" })
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.NewProduct.ProductId, new {  id = "ProductId" })
                     @Html.Hidden("FormMode", "Create", new { id = "FormMode" })
                     <div class="mb-4">
                         @Html.LabelFor(model => model.NewProduct.ProductName, new { @class = "block text-sm font-medium text-gray-700" })
@@ -107,8 +113,12 @@
                         @Html.LabelFor(model => model.NewProduct.ProductBrand, new { @class = "block text-sm font-medium text-gray-700" })
                         @Html.TextBoxFor(model => model.NewProduct.ProductBrand, new { @class = "form-control", @id = "ProductBrand", @required = "required" })
                     </div>
+                    <div id="imageUploadContainer">
+                        <input type="file" name="productImages" class="product-image-input" />
+                    </div>
+                    <button type="button" id="addMoreImages">+</button>
                     <div>
-                        <input type="submit" id="formButton" value="Aggiungi" class="btn btn-primary" />
+                        <input type="submit" id="formButton" value="Aggiungi prodotto" class="btn btn-primary" />
                     </div>
                 }
             </div>
@@ -118,15 +128,14 @@
     <div class="accordion-item hidden" id="updateProduct">
         <h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                <span id="accordionTitle">#2 Modifica un prodotto esistente</span>
+                <span id="accordionTitle">#3 Modifica un prodotto esistente</span>
             </button>
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#updateProduct">
             <div class="accordion-body">
-                @using (Html.BeginForm("UpdateProduct", "BackOffice", FormMethod.Post))
+                @using (Html.BeginForm("UpdateProduct", "BackOffice", FormMethod.Post, new { id="updateProductForm" }))
                 {
-                    @Html.Hidden("_method", "PUT")
-                    @Html.HiddenFor(model => model.NewProduct.ProductId, new { @id = "ProductId" })
+                    @Html.HiddenFor(model => model.NewProduct.ProductId, new { id = "ProductId" })
                     @Html.Hidden("FormMode", "Edit", new { id = "FormMode" })
                     <div class="mb-4">
                         @Html.LabelFor(model => model.NewProduct.ProductName, new { @class = "block text-sm font-medium text-gray-700" })
@@ -162,11 +171,11 @@
     <!-- Aggiungi immagini al prodotto esistente -->
     <div class="accordion-item">
         <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                #3 Aggiungi immagini ad un prodotto
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                #4 Aggiungi immagini ad un prodotto
             </button>
         </h2>
-        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

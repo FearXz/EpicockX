@@ -27,36 +27,47 @@ namespace EpicockX.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddProduct(Product product)
+        public async Task<IActionResult> AddProduct(BackOfficeIndexViewModel viewModel, List<IFormFile> productImages)
         {
             if (!ModelState.IsValid)
             {
-                var viewModelValid = new BackOfficeIndexViewModel
-                {
-                    Products = _productSvc.GetProducts(),
-                    NewProduct = product
-                };
-                return View("Index", viewModelValid);
+                viewModel.Products = _productSvc.GetProducts();
+                return View("Index", viewModel);
             }
 
-            _productSvc.AddProduct(product);
+            _productSvc.AddProduct(viewModel.NewProduct);
+
+            if (productImages != null && productImages.Count > 0)
+            {
+                foreach (var image in productImages)
+                {
+                    if (image.Length > 0)
+                    {
+                        // Crea un oggetto ProductImage per ogni immagine caricata
+                        var productImage = new ProductImage
+                        {
+                            ProductId = viewModel.NewProduct.ProductId,
+                            ImageFile = image
+                        };
+                        _imageSvc.AddImage(productImage);
+                    }
+                }
+            }
+
             return RedirectToAction("Index");
         }
 
-        [HttpPut]
-        public IActionResult UpdateProduct(Product product)
+
+        [HttpPost]
+        public IActionResult UpdateProduct(BackOfficeIndexViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                var viewModelValid = new BackOfficeIndexViewModel
-                {
-                    Products = _productSvc.GetProducts(),
-                    NewProduct = product
-                };
-                return View("Index", viewModelValid);
+                viewModel.Products = _productSvc.GetProducts();
+                return View("Index", viewModel);
             }
 
-            _productSvc.UpdateProduct(product);
+            _productSvc.UpdateProduct(viewModel.NewProduct);
             return RedirectToAction("Index");
         }
 
