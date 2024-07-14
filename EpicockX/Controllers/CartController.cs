@@ -41,7 +41,6 @@ namespace EpicockX.Controllers
             }
             var cart = _cartSvc.GetCart();
             var userId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
-
             var session = _cartSvc.CreateCheckoutSession(cart);
             order.SessionId = session.Id;
             var orderId = _cartSvc.SubmitOrder(order, userId, cart);
