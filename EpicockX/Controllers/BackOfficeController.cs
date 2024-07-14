@@ -18,21 +18,11 @@ namespace EpicockX.Controllers
         public IActionResult Index()
         {
             var products = _productSvc.GetProducts();
-            var productImages = new Dictionary<int, List<ProductImage>>();
-
-            foreach (var product in products)
-            {
-                var images = _productSvc.GetProductImages(product.ProductId);
-                productImages[product.ProductId] = images;
-            }
-
             var viewModel = new BackOfficeIndexViewModel
             {
                 Products = products,
                 NewProduct = new Product(),
-                ProductImages = productImages
             };
-
             return View(viewModel);
         }
 
