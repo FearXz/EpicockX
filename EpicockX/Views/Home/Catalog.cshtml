@@ -2,7 +2,6 @@
 @model IEnumerable<EpicockX.Models.Product>
 @{
     ViewData["Title"] = "Catalog";
-    var images = (IEnumerable<EpicockX.Models.ProductImage>)ViewBag.Images;
 }
 <style>
     .mainColor {
@@ -40,9 +39,9 @@
             @foreach (var product in Model)
             {
                 <div class="product_card relative">
-                    @foreach (var image in images.Where(img => img.ProductId == product.ProductId))
+                    @foreach (var image in product.ProductImages)
                     {
-                        <img src="@image.ProductImageUrl" class="w-full h-48 object-cover mb-4">
+                        <img src="@image" class="w-full h-48 object-cover mb-4">
                     }
                     <h2 class="text-xl font-semibold mb-2">@product.ProductName</h2>
                     <p class="text-white-700 mb-2">@product.ProductDescription</p>

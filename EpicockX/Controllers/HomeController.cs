@@ -32,17 +32,13 @@ namespace EpicockX.Controllers
         public IActionResult Index()
         {
             var products = _productSvc.GetProducts();
-            var images = _imageSvc.GetImages();
-            ViewBag.Images = images;
             return View(products);
         }
 
         // Creazione pagina Dettaglio Prodotto
         public IActionResult Details(int id)
         {
-            var product = _productSvc.GetProductById(id);
-            var images = _imageSvc.GetImages().Where(img => img.ProductId == id).ToList();
-            ViewBag.Images = images;
+            var product = _productSvc.GetProductById(id); 
             return View(product);
         }
 
@@ -74,15 +70,6 @@ namespace EpicockX.Controllers
         public IActionResult Catalog(string category = "all")
         {
             var products = _productSvc.GetProducts();
-
-            if (category != "all")
-            {
-                products = products.Where(p => p.ProductCategory == category).ToList();
-            }
-
-            var images = _imageSvc.GetImages();
-            ViewBag.Images = images;
-
             return View(products);
         }
 
