@@ -1,0 +1,30 @@
+﻿@model List<Product> 
+
+@{
+    Layout = null;
+}
+
+@if (Model != null && Model.Count > 0)
+{
+    <div>Articoli nel carrello: @Model.Count</div>
+
+    <ul class="list-unstyled border-top">
+        <li class="py-2 border-bottom">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <img src="https://via.placeholder.com/40" alt="Product Image" class="h-10 w-10">
+                    <div class="ms-2">
+                        <p class="font-weight-bold text-gray-300 mb-0">Nome Prodotto</p>
+                        <p class="text-gray-400 mb-0">Quantità: 1</p>
+                    </div>
+                </div>
+                <p class="font-weight-bold">€ 10.00</p>
+            </div>
+        </li>
+        <!-- Aggiungi altri articoli qui -->
+    </ul>
+}
+else
+{
+    <div>Il carrello è vuoto.</div>
+}
