@@ -16,17 +16,19 @@
                     <img src="#" alt="Product Image" class="h-10 w-10">
                     <div class="ms-2">
                         <p class="font-weight-bold text-gray-300 mb-0">@i.ProductName</p>
+                            <p class ="font-weight-bold text-gray-300 mb-0">
+                                @i.ProductQuantity</p>
                         <p class="text-gray-400 mb-0">@i.ProductQuantity</p>
                     </div>
                 </div>
-                <p class="font-weight-bold">@i.ProductPrice</p>
+                <p class="font-weight-bold">@i.TotalPrice</p>
             </div>
         </li>
         <!-- Aggiungi altri articoli qui -->
     </ul>
     }
     <div class="d-flex justify-content-between align-items-center mt-4">
-        <p><span class="text-white">Totale:</span> <span class="text-white">@Model.Sum(p => p.ProductPrice) </span></p>
+        <p><span class="text-white">Totale:</span> <span class="text-white">@Model.Sum(p => p.TotalPrice) </span></p>
         <button class="btn btn-success w-100">Procedi all'acquisto</button>
     </div>
 }

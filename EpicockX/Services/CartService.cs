@@ -15,6 +15,7 @@ namespace EpicockX.Services
         {
             _http = httpContextAccessor;
             _config = config;
+          
         }
 
         public Session CreateCheckoutSession(List<Product> cart)
@@ -196,4 +197,6 @@ namespace EpicockX.Services
             }
         }
     }
+
+  
 }

@@ -25,13 +25,15 @@
             <div class="d-flex gap-3 gap-lg-4">
                 <a asp-action="Index" class="text-white fw-semibold">Homepage</a>
                 <a asp-controller="Home" asp-action="Catalog" class="text-white fw-semibold">Catalogo</a>
+                <a asp-controller="Cart" asp-action="Index" class="text-white fw-semibold">Carrello</a>  
                 <a asp-controller="BackOffice" asp-action="Index" class="text-white fw-semibold">Admin</a>
-                <a asp-controller="" asp-action="Cart" class="text-white fw-semibold">Cart</a>
+                
             </div>
-            <div class="d-lg-flex flex-lg-fill justify-content-lg-end">
-                <button class="btn btnCart" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fas fa-shopping-cart"></i></button>
-                <a asp-controller="Auth" asp-action="Index" class="text-white fw-semibold">Login</a>
-
+            <div class="d-lg-flex flex-lg-fill justify-content-end align-items-center">
+                <a asp-controller="Auth" asp-action="Index" class="text-white fw-semibold me-3">Login</a>
+                <button class="btn btnCart me-5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fas fa-shopping-cart"></i></button>
+                
+                </div>
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel"> 
                 <div class="offcanvas-body p-0 m-0">
                                 <div class="p-4 border-bottom d-flex align-items-center justify-content-between bg-primary" id="colCartNav">

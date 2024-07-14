@@ -88,20 +88,7 @@ h2 {
         .input-group input:valid ~ label {
             top: -5px;
         }
-button {
-    position: relative;
-    width: 100%;
-    height: 40px;
-    background: #0ef;
-    box-shadow: 0 0 10px #0ef;
-    font-size: 16px;
-    color: #000;
-    font-weight: 500;
-    cursor: pointer;
-    border-radius: 30px;
-    border: none;
-    outline: none;
-}
+
 
 .signUp-link {
     font-size: 14px;
