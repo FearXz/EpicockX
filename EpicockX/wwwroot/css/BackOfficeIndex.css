@@ -5,3 +5,20 @@
 #deleteModal.show {
     display: block;
 }
+
+#deleteModal {
+    display: none;
+}
+
+    #deleteModal.show {
+        display: block;
+    }
+
+.hidden {
+    display: none !important;
+}
+
+.toast-top-right-cm {
+    top: 90px;
+    right: 12px;
+}
