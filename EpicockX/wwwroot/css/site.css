@@ -327,6 +327,13 @@ h2 {
 }
 
 /*-----------------catalog-------------------------*/
+
+.colorBg {
+    background-image: url(../assets/images/banner/SfondoIndex.jpg);
+    background-size: contain;
+    background-position: center;
+}
+
 .mainColor {
     background-color: #1D1E22;
 }
