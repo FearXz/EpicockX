@@ -50,11 +50,21 @@ namespace EpicockX.Controllers
             return Redirect(session.Url);
         }
 
-        public IActionResult AddToCart(int id, string returnUrl)
+        public IActionResult AddToCart(int id, string returnUrl, int quantity)
         {
             List<Product> cart = _cartSvc.GetCart();
             Product product = _productSvc.GetProductById(id);
-            cart.Add(product);
+            
+            var existingProduct = cart.FirstOrDefault(p => p.ProductId == id);
+            if (existingProduct != null)
+            {
+                existingProduct.ProductQuantity += quantity;
+            }
+            else   
+            {
+                product.ProductQuantity = quantity;
+                cart.Add(product);
+            }
             _cartSvc.SaveCart(cart);
 
             // Utilizza returnUrl per reindirizzare l'utente, se è fornito e valido
@@ -67,14 +77,18 @@ namespace EpicockX.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult RemoveFromCart(int productId, string returnUrl)
+        public IActionResult RemoveFromCart(int productId, string returnUrl, int quantity)
         {
             List<Product> cart = _cartSvc.GetCart();
             Product productToRemove = cart.FirstOrDefault(p => p.ProductId == productId);
             if (productToRemove != null)
             {
-                cart.Remove(productToRemove);
-                _cartSvc.SaveCart(cart);
+               productToRemove.ProductQuantity -= quantity;
+               if(productToRemove.ProductQuantity <= 0)
+               {
+                   cart.Remove(productToRemove);
+               }
+               _cartSvc.SaveCart(cart);
             }
             if (!string.IsNullOrEmpty(returnUrl))
             {

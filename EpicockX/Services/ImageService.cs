@@ -101,8 +101,7 @@ namespace EpicockX.Services
                 if (image.ImageFile != null && image.ImageFile.Length > 0)
                 {
                     string uploadsFolder = Path.Combine(_env.WebRootPath, "assets/Products"); // prende la radice del progetto e concatena la cartella assets/Products
-                    string uniqueFileName =
-                        $"{image.ProductId}-{image.ProductImageUrl}.{Path.GetExtension(image.ImageFile.FileName)}"; // crea un nome univoco per il file
+                    string uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(image.ImageFile.FileName)}"; // crea un nome univoco per il file
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName); // concatena i due nomi precedenti per creare il percorso del file
                     using (var fileStream = new FileStream(filePath, FileMode.Create)) // crea un file stream (oggetto proprio di .net per salvare i file)
                     {

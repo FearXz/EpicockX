@@ -1,0 +1,7 @@
+﻿#deleteModal{
+    display: none;
+}
+
+#deleteModal.show {
+    display: block;
+}

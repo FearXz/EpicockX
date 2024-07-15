@@ -2,8 +2,42 @@
 @{
     ViewData["Title"] = "Success";
 }
+<style>
+    .toast-top-right-custom {
+        top: 90px;
+        right: 12px; 
+    }
+</style>
 
-<h1>Success</h1>
-@Model.OrderId 
-@Model.ProductList
+<div class="container my-5">
+    <div class="jumbotron">
+        <h1 class="display-4">Ordine Completato!</h1>
+        <p class="lead">Il tuo ordine è stato completato con successo.</p>
+        <hr class="my-4">
+        <p>Numero dell'Ordine: <strong>@Model.OrderId</strong></p>
+        <h3>Dettagli ordine: <strong>@Model.ProductList</strong></h3>
+       
+        <a class="btn btn-primary btn-lg mt-3" href="/" role="button">Torna alla Home</a>
+    </div>
+</div>
 
+@section Scripts {
+
+    <script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            toastr.options = {
+                "positionClass": "toast-top-right-custom", 
+                "closeButton": true,
+                "progressBar": true,
+                "preventDuplicates": true,
+                "newestOnTop": false
+            };
+            toastr.success('@TempData["success"]' || 'Il tuo ordine è stato completato');
+        });
+    </script>
+
+    </script>
+}

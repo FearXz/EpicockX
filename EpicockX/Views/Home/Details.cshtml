@@ -1,5 +1,5 @@
 ﻿@using EpicockX.Models
-@model Product
+@model EpicockX.Models.Product
 
 
 <link rel="stylesheet" href="~/css/Details.css" />
@@ -48,56 +48,93 @@
     .main {
         background-image: url(../assets/images/banner/SfondoIndex.jpg);
     }
+
+    #quantityInput {
+        background-color: black;
+        color: white; 
+        border: 2px solid black; 
+        border-radius: 5px; 
+        padding: 5px 10px; 
+    }
+
+        #quantityInput:focus {
+            border-color: #BF9A5C; 
+            box-shadow: 0 0 5px rgba(191, 154, 92, 0.5); 
+        }
   
 </style>
 
-<div class="main">
-<div class="card custom-card w-50 mx-auto my-10">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                @for (int i = 0; i < Model.ProductImages.Count; i++)
-                {
-                    <li data-target="#carouselExampleIndicators" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
-                }
-            </ol>
+<div class="container py-10 ">
+    <div class="card custom-card w-50 mx-auto  border-0">
+        <!-- Inizio Carosello -->
+        <div id="productCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-                @for (int i = 0; i < Model.ProductImages.Count; i++)
+                @foreach (var image in Model.ProductImages)
                 {
-                    <div class="carousel-item @(i == 0 ? "active" : "")">
-                        <img src="@Model.ProductImages[i]" class="d-block w-100 carousel-img" alt="Product Image @(i + 1)">
+                    <div class="carousel-item @(image == Model.ProductImages.First() ? "active" : "")">
+                        <img src="@image" class="d-block w-100 carousel-img" alt="...">
                     </div>
                 }
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
+                <span class="sr-only">Precedente</span>
             </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
+                <span class="sr-only">Successivo</span>
             </a>
         </div>
-
-    <div class="card-body text-center bg-dark text-white">
-        <h5 class="card-title text-lg">@Model.ProductName</h5>
-        <p class="card-text">@Model.ProductDescription</p>
-        <div class="list-group">
-            <div class="grid grid-cols-2">
-                <p class="list-group-item ">Categoria: @Model.ProductCategory</p>
-                <p class="list-group-item">Marca: @Model.ProductBrand</p>
-            <p class="list-group-item">Quantità: @Model.ProductQuantity</p>
-            <p class="list-group-item">Prezzo: @Model.ProductPrice.ToString("C")</p>
-            </div>
-
-                <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.ProductId" asp-route-returnUrl="@Context.Request.Path" class="btn btnDetails mt-2">Aggiungi al carrello</a>
-
-
+        <!-- Fine Carosello -->
+        <div class="card-body text-center bg-dark text-white p-4">
+            <h5 class="card-title fs-4">@Model.ProductName</h5>
+            <p class="card-text">@Model.ProductDescription</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item border-0">Categoria: @Model.ProductCategory</li>
+                <li class="list-group-item border-0">Marca: @Model.ProductBrand</li>
+                <li class="list-group-item border-0">
+                    Quantità:
+                    <input id="quantityInput" type="number" class="form-control" value="1" min="1" max="10">
+                </li>
+                <li class="list-group-item border-0">Prezzo: @Model.ProductPrice.ToString("C")</li>
+            </ul>
+            <button id="addToCartBtn" data-id="@Model.ProductId" class="btn btn-primary mt-2">Aggiungi al carrello</button>
         </div>
     </div>
 </div>
-</div>
+
+
+
 
 @section Scripts {
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
+    <script>
+        $(document).ready(function () {
+            $('#productCarousel').carousel({
+                interval: 2000
+            });
+            $('.carousel').css('transition-duration', '0.5s');
+
+            $('.carousel-control-prev').click(function () {
+                $('#productCarousel').carousel('prev');
+            });
+
+            $('.carousel-control-next').click(function () {
+                $('#productCarousel').carousel('next');
+            });
+
+            let addToCartBtn = document.getElementById('addToCartBtn');
+            addToCartBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                let idProdotto = $(this).data('id');
+                let quantity = $('#quantityInput').val();
+                let url = '@Url.Action("AddToCart", "Cart")';
+                console.log(url + '?id=' + idProdotto + '&quantity=' + quantity + '&returnUrl=' + '@Context.Request.Path');
+                window.location.href = url + '?id=' + idProdotto + '&quantity=' + quantity + '&returnUrl=' + '@Context.Request.Path';
+            });
+        });
+    </script>
 }

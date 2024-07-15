@@ -1,55 +1,58 @@
-﻿@model EpicockX.Models.OrderPostDto
+﻿<link rel="stylesheet" href="~/css/Checkout.css" />
+@using EpicockX.Models;
+@model EpicockX.Models.OrderPostDto
 
 @{
     ViewData["Title"] = "Checkout";
 }
 
-<h1>Checkout</h1>
+<h1 class="text-center text-light">Checkout</h1>
 
-<h4>OrderPostDto</h4>
-<hr />
-<div class="row">
+
+
+<div class="row justify-content-center">
     <div class="col-md-4">
         <form asp-action="Checkout">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label text-light"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Surname" class="control-label"></label>
+                <label asp-for="Surname" class="control-label text-light"></label>
                 <input asp-for="Surname" class="form-control" />
                 <span asp-validation-for="Surname" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
+                <label asp-for="Address" class="control-label text-light"></label>
                 <input asp-for="Address" class="form-control" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="City" class="control-label"></label>
+                <label asp-for="City" class="control-label text-light"></label>
                 <input asp-for="City" class="form-control" />
                 <span asp-validation-for="City" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ZipCode" class="control-label"></label>
+                <label asp-for="ZipCode" class="control-label text-light"></label>
                 <input asp-for="ZipCode" class="form-control" />
                 <span asp-validation-for="ZipCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Country" class="control-label"></label>
+                <label asp-for="Country" class="control-label text-light"></label>
                 <input asp-for="Country" class="form-control" />
                 <span asp-validation-for="Country" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group mt-2">
+                <input type="submit" value="Create" class="btn btnColor w-100" />
             </div>
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
