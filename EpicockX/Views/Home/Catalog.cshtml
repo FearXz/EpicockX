@@ -7,6 +7,25 @@
     .mainColor {
         background-color: #1D1E22;
     }
+
+    li {
+        list-style-type: none;
+    }
+
+    .card-image img {
+        width:100%;
+        height:300px;
+        object-fit: contain;
+    }
+    
+    .descrizione {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
 </style>
 
 <div class="d-flex bg-dark text-white border-end border-2 border-black">
@@ -27,28 +46,25 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="fs-1 fw-bold">I nostri Sex Toys</h1>
             <div>
-                <span class="fs-6">@Model.Count() results</span>
-                <select class="ms-4 p-2 border text-dark">
-                    <option value="asc">Order by: Ascending</option>
-                    <option value="desc">Order by: Descending</option>
-                </select>
+                <span class="fs-6">@Model.Count() risultati</span>
             </div>
         </div>
 
-       <div class="row g-3 p-2">
+        <div class="row g-3 p-2">
             @foreach (var product in Model)
             {
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch">
                     <div class="card w-100 position-relative">
                         @if (product.ProductImages.Any())
                         {
-                            <div class="card-image w-50"> 
-                            <img src="@product.ProductImages.First()" class="card-img-top h-48 object-cover " style="width:75%">
+                            <div class="card-image">
+                                <img src="@product.ProductImages.First()" class="card-img-top" />
                             </div>
                         }
-                        <div class="card-body d-flex flex-column bg-black ">
+                        <div class="card-body d-flex flex-column bg-black">
                             <h2 class="card-title fs-4 fw-semibold mb-2 text-light">@product.ProductName</h2>
-                            <p class="card-text text-light mb-2 ">@product.ProductDescription</p>
+                            <p class="card-text text-light mb-2 descrizione">@((product.ProductDescription.Length > 50) ? product.ProductDescription.Substring(0, 50) + "..." : product.ProductDescription)</p>
+
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <p class="text-white fw-bold">€@product.ProductPrice</p>
                             </div>
@@ -61,8 +77,8 @@
                     </div>
                 </div>
             }
+        </div>
 
-    </div>
     </main>
 
 </div>

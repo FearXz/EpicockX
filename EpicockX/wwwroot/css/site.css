@@ -44,8 +44,16 @@ a {
 }
 
 /*---------------------- Header --------------------*/
+header {
+
+}
+
 nav {
-    height: 7vh
+    height: 7vh;
+    background-image: url(../assets/images/banner/footer.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 /*---------------------- Header --------------------*/

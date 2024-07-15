@@ -3,44 +3,55 @@
 @{
     Layout = null;
 }
+<style> 
+ 
+
+.mt-auto {
+    margin-top: auto;
+}
+</style>
 
 @if (Model != null && Model.Count > 0)
 {
-    <div>Articoli nel carrello: @Model.Count</div>
-    <p class="text-center p-3 text-white">Prodotti selezionati da acquistare</p>
-    @foreach (var i in Model)
-    {
-        <ul class="list-unstyled border-top">
-            <li class="py-2 border-bottom">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center justify-content-center">
-                        @if (i.ProductImages.Any())
-                        {
-                            <img src="@i.ProductImages.FirstOrDefault()" alt="Immagine prodotto" style="width: 50px; height: auto;">
-                        }
-                        <div class="ms-2 ">
-                            <p class="font-weight-bold text-gray-300 mb-0">Nome: @i.ProductName</p>
-                            <p class="font-weight-bold text-gray-300 mb-0">
-                                Quantita': @i.ProductQuantity
-                            </p>
-
+    <div class="position-relative  d-flex flex-column">
+        <div>
+            <p class="m-0 mt-4">Articoli nel carrello: @Model.Count</p>
+        </div>
+        <p class="text-center p-3 text-white">Prodotti selezionati da acquistare</p>
+        @foreach (var i in Model)
+        {
+            <ul class="list-unstyled border-top">
+                <li class="py-2 border-bottom">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center justify-content-around">
+                            @if (i.ProductImages.Any())
+                            {
+                                <img src="@i.ProductImages.FirstOrDefault()" alt="Immagine prodotto ms-2" style="width: 50px; height: auto;">
+                            }
+                        </div>
+                        <div class="d-flex flex-column">
+                            <p class="m-0">Nome:</p>
+                            <p class="fw-bold  fs-6 text-gray-300 mb-0">@i.ProductName</p>
+                        </div>
+                        <div class="d-flex flex-column align-items-center justify-content-center">
+                            <p class="fw-bold text-gray-300 mb-0">Quantità: @i.ProductQuantity</p>
+                            <p class="fw-bold m-0">Prezzo: @i.TotalPrice</p>
                         </div>
                     </div>
-                    <p class="font-weight-bold">Prezzo: @i.TotalPrice</p>
-                </div>
-            </li>
-        </ul>
-    }
-    <div class="d-flex flex-column  align-items-center mt-4">
-        <p><span class="text-white">Totale:</span> <span class="text-white">@Model.Sum(p => p.TotalPrice).ToString("C")</span></p>
-
-        <form method="get" asp-controller="Cart" asp-action="Checkout">
-            <button type="submit" class="btn btn-success w-100">Procedi al Checkout</button>
-        </form>
+                </li>
+            </ul>
+        }
+        <div class="mt-auto w-100">
+            <div class="text-center p-3 text-white">
+                <p><span class="text-white">Totale:</span> <span class="text-white">@Model.Sum(p => p.TotalPrice).ToString("C")</span></p>
+                <form method="get" asp-controller="Cart" asp-action="Checkout">
+                    <button type="submit" class="btn btn-success w-100">Procedi al Checkout</button>
+                </form>
+            </div>
+        </div>
     </div>
 }
 else
 {
     <div>Il carrello è vuoto.</div>
 }
-

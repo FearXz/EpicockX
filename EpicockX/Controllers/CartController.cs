@@ -99,7 +99,9 @@ namespace EpicockX.Controllers
 
         public IActionResult Success(string session_id)
         {
-            return View(_cartSvc.GetResultOrder(session_id));
+            var result = _cartSvc.GetResultOrder(session_id);
+            _cartSvc.ClearCart();
+            return View(result);
         }
     }
 }
