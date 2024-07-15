@@ -137,8 +137,16 @@
                     <h4 class="title text-dark">
                         @Model.ProductName
                     </h4>
+                    <div class="d-flex flex-row my-3">
+                        <span class="text-muted">
+                            <i class="fas fa-shopping-basket fa-sm mx-1"></i>@Model.ProductQuantity
+                            orders
+                        </span>
+                        <span class="text-success ms-2">In stock</span>
+                    </div>
+
                     <div class="mb-3">
-                        <span class="h5">@Model.ProductQuantity</span>
+                        <span class="h5">$75.00</span>
                         <span class="text-muted">/per box</span>
                     </div>
 
