@@ -4,7 +4,41 @@
 
 @{
     ViewData["Title"] = "Home Page";
+    var selectedImages = new List<int> { 26, 2,19, 25 };
+    var selectedProducts = Model.Where(p => selectedImages.Contains(p.ProductId)).ToList();
 }
+
+<style>
+    .card {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .card img {
+            width: auto;
+            height: 100%;
+            object-fit: contain;
+        }
+
+    .first-content, .second-content {
+        position: relative;
+        width: auto;
+        height: 100%;
+    }
+
+    .card-text {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        text-align: center;
+        padding: 10px;
+        margin: 0;
+    }
+
+
+</style>
 
 
 <!-- Modale Promozionale -->
@@ -48,21 +82,22 @@
         <h2 class="text-center pt-3 pb-3 h4">Prodotti in evidenza</h2>
         <div class="d-flex justify-content-center align-items-center">
             <div class="row g-3">
-                @foreach (var product in Model.Take(4))
+                @foreach (var product in selectedProducts)
                 {
                     <div class="col-3">
                         <div class="card" data-content="@product.ProductName">
                             @if (product.ProductImages != null && product.ProductImages.Count >= 2)
                             {
-                                var firstImage = product.ProductImages[0];
-                                var secondImage = product.ProductImages[1];
+                              
+
 
                                 <div class="first-content">
-                                    <img src="@firstImage" alt="Immagine del prodotto" class="card-img-top" style="width:75%" />
+                                    <img src="@product.ProductImages[0]" alt="Immagine del prodotto" class="card-img-top img-fluid" />
+                                    
                                 </div>
 
                                 <div class="second-content d-flex flex-column">
-                                    <img src="@secondImage" alt="Immagine del prodotto" class="img-fluid" style="width:75%;" />
+                                    <img src="@product.ProductImages[1]" alt="Immagine del prodotto" class="img-fluid" />
                                     <p class="card-text">@product.ProductName</p>
                                 </div>
                             }
@@ -71,7 +106,8 @@
                                 var firstImage = product.ProductImages[0];
 
                                 <div class="first-content">
-                                    <img src="@firstImage" alt="Immagine del prodotto" class="card-img-top" style="width:75%;" />
+                                    <img src="@firstImage" alt="Immagine del prodotto" class="card-img-top img-fluid" style="width: 75%;" />
+                                    <p class="card-text">@product.ProductName</p>
                                 </div>
                                 <div class="second-content d-flex flex-column">
                                     <p class="card-text">@product.ProductName</p>
@@ -80,13 +116,16 @@
                             else
                             {
                                 <div class="first-content">
-                                    <img src="default_image_path" alt="Immagine del prodotto" class="card-img-top" />
+                                    <img src="default_image_path" alt="Immagine del prodotto" class="card-img-top img-fluid" />
+                                    <p class="card-text">@product.ProductName</p>
                                 </div>
                                 <div class="second-content d-flex flex-column">
                                     <p class="card-text">@product.ProductName</p>
                                 </div>
                             }
                         </div>
+
+
                     </div>
                 }
             </div>
