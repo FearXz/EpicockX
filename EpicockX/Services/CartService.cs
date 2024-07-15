@@ -20,8 +20,9 @@ namespace EpicockX.Services
 
         public Session CreateCheckoutSession(List<Product> cart)
         {
+            // URL del dominio del sito web
             var domain = "https://localhost:7231/";
-
+            // Creo le opzioni per la sessione di Stripe
             var Options = new SessionCreateOptions
             {
                 SuccessUrl = domain + "Cart/Success?session_id={CHECKOUT_SESSION_ID}",
@@ -30,9 +31,10 @@ namespace EpicockX.Services
                 LineItems = new List<SessionLineItemOptions>(),
                 Mode = "payment",
             };
-
+            // Aggiungo i prodotti al carrello
             foreach (var item in cart)
             {
+                // Creo un oggetto SessionLineItemOptions per ogni prodotto
                 var sessionLineItem = new SessionLineItemOptions
                 {
                     PriceData = new SessionLineItemPriceDataOptions
@@ -47,12 +49,13 @@ namespace EpicockX.Services
                     },
                     Quantity = 1
                 };
+                // Aggiungo l'oggetto SessionLineItemOptions alla lista di LineItems
                 Options.LineItems.Add(sessionLineItem);
             }
             // creo la sessione di Stripe e la invio al client
             var service = new SessionService();
             Session session = service.Create(Options);
-
+            // Ritorno l'oggetto Session
             return session;
         }
 
