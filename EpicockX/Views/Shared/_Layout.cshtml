@@ -23,7 +23,7 @@
                 <img class="logoImage" src="./assets/images/logo.jpg" alt="Logo Epicock">
             </div>
             <div class="d-flex gap-3 gap-lg-4">
-                <a asp-action="Index" class="text-white fw-semibold">Homepage</a>
+                <a  asp-controller="Home" asp-action="Index" class="text-white fw-semibold">Homepage</a>
 
                 @if (Context.User.Identity.IsAuthenticated)
                 {

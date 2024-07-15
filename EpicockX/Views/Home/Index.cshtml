@@ -52,13 +52,37 @@
                 {
                     <div class="col-3">
                         <div class="card" data-content="@product.ProductName">
-                            @foreach (var image in Model.Take(1))
+                            @if (product.ProductImages != null && product.ProductImages.Count >= 2)
                             {
+                                var firstImage = product.ProductImages[0];
+                                var secondImage = product.ProductImages[1];
+
                                 <div class="first-content">
-                                    <img src="@image.ProductImages" alt="Immagine del prodotto" class="card-img-top" />
+                                    <img src="@firstImage" alt="Immagine del prodotto" class="card-img-top" style="width:100%;" />
+                                </div>
+
+                                <div class="second-content d-flex flex-column">
+                                    <img src="@secondImage" alt="Immagine del prodotto" class="img-fluid" style="width:100%;" />
+                                    <p class="card-text">@product.ProductName</p>
+                                </div>
+                            }
+                            else if (product.ProductImages != null && product.ProductImages.Count == 1)
+                            {
+                                var firstImage = product.ProductImages[0];
+
+                                <div class="first-content">
+                                    <img src="@firstImage" alt="Immagine del prodotto" class="card-img-top" style="width:100%;" />
                                 </div>
                                 <div class="second-content d-flex flex-column">
-                                    <img src="@image.ProductImages" alt="Immagine del prodotto" class="img-fluid" />
+                                    <p class="card-text">@product.ProductName</p>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="first-content">
+                                    <img src="default_image_path" alt="Immagine del prodotto" class="card-img-top" />
+                                </div>
+                                <div class="second-content d-flex flex-column">
                                     <p class="card-text">@product.ProductName</p>
                                 </div>
                             }
@@ -66,6 +90,8 @@
                     </div>
                 }
             </div>
+
+
         </div>
 
 
