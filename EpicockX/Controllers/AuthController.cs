@@ -40,7 +40,6 @@ namespace EpicockX.Controllers
                 return View();
             }
             _authSvc.Login(user);
-
             TempData["success"] = "Login effettuato con successo";
 
             return RedirectToAction("Index", "Home");
