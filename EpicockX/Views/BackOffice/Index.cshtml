@@ -17,6 +17,11 @@
     display: none !important;
 }
 
+    .toast-top-right-cm {
+        top: 90px;
+        right: 12px;
+    }
+
 </style>
 
 <div class="accordion" id="productsAccordion">
@@ -198,7 +203,25 @@
     </div>
 </div>
 
-@section Scripts {
-    <script src="~/js/BackOfficeIndex.js"></script>
 
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="~/js/BackOfficeIndex.js"></script>
+    <script>
+        $(document).ready(function () {
+            toastr.options = {
+                "positionClass": "toast-top-right-cm",
+                "progressBar": true,
+                "preventDuplicates": true,
+                "newestOnTop": false
+            };
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                    toastr.success('@TempData["SuccessMessage"]');
+            </text>
+        }
+        });
+    </script>
 }

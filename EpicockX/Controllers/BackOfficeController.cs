@@ -55,6 +55,9 @@ namespace EpicockX.Controllers
                 }
             }
 
+            // Imposta il messaggio di successo in TempData
+            TempData["SuccessMessage"] = "Prodotto aggiunto con successo!";
+
             return RedirectToAction("Index");
         }
 
@@ -70,13 +73,22 @@ namespace EpicockX.Controllers
             }
 
             _productSvc.UpdateProduct(viewModel.NewProduct);
+            TempData["SuccessMessage"] = "Prodotto aggiornato con successo!";
             return RedirectToAction("Index");
         }
-
         [HttpPost]
         public IActionResult DeleteProduct(int id)
         {
-            _productSvc.DeleteProduct(id);
+            try
+            {
+                _productSvc.DeleteProduct(id);
+                TempData["SuccessMessage"] = "Prodotto eliminato con successo!";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Errore nell'eliminazione del prodotto.";
+            }
+
             return RedirectToAction("Index");
         }
 
