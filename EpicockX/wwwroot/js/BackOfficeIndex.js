@@ -107,15 +107,20 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   $(document).ready(function () {
-    $("#addMoreImages").click(function (e) {
+    $("#addMoreImagesForAdd").click(function (e) {
       e.preventDefault();
       $("#imageUploadContainer").append(
         '<input type="file" name="productImages" class="product-image-input" />'
       );
     });
   });
+
+  $(document).ready(function () {
+    $("#addMoreImagesForUpload").click(function (e) {
+      e.preventDefault();
+      $("#imageUploadContainerForUpload").append(
+        '<input type="file" name="productImages" class="product-image-input" />'
+      );
+    });
+  });
 });
-
-    
-
-     

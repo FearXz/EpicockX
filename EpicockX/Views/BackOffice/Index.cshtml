@@ -118,12 +118,12 @@
                         @Html.LabelFor(model => model.NewProduct.ProductBrand, new { @class = "block text-sm font-medium text-gray-700" })
                         @Html.TextBoxFor(model => model.NewProduct.ProductBrand, new { @class = "form-control", @id = "ProductBrand", @required = "required" })
                     </div>
-                    <div id="imageUploadContainer">
+                    <div id="imageUploadContainerForAdd">
                         <label for="productImages">Carica immagini:</label>
                         <input type="file" name="productImages" class="product-image-input" multiple />
 
                     </div>
-                    <button type="button" id="addMoreImages">+</button>
+                    <button type="button" id="addMoreImagesForAdd">+</button>
                     <div>
                         <input type="submit" id="formButton" value="Aggiungi prodotto" class="btn btn-primary" />
                     </div>
@@ -168,12 +168,12 @@
                         @Html.LabelFor(model => model.NewProduct.ProductBrand, new { @class = "block text-sm font-medium text-gray-700" })
                         @Html.TextBoxFor(model => model.NewProduct.ProductBrand, new { @class = "form-control", @id = "ProductBrand", @required = "required" })
                     </div>
-                    <div id="imageUploadContainer">
+                    <div id="imageUploadContainerForUpload">
                         <label for="productImages">Carica immagini:</label>
                         <input type="file" name="productImages" class="product-image-input" multiple />
 
                     </div>
-                    <button type="button" id="addMoreImages">+</button>
+                    <button type="button" id="addMoreImagesForUpload">+</button>
                     <div id="imagesContainer">
                     </div>
                     <div>
