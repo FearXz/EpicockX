@@ -58,14 +58,14 @@ nav {
 
 /*---------------------- Header --------------------*/
 main {
-    min-height: 63vh;
+    min-height: 73vh;
 }
 
 
 /*---------------------- Footer --------------------*/
 
 footer {
-    
+    height: 20vh;
 }
 
 #footImg {
@@ -75,9 +75,7 @@ footer {
     background-repeat: no-repeat;
     color: white;
     font-weight: bold;
-    font-family: 'Roboto', sans-serif;
-    height: 25em;
-    
+    font-family: 'Roboto', sans-serif;    
 }
 
 
