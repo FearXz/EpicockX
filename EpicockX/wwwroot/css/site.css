@@ -57,17 +57,19 @@ main {
 /*---------------------- Footer --------------------*/
 
 footer {
-    height: 30vh
+    
 }
 
 #footImg {
-    background-image: url(../assets/images/banner/footer.jpg);
+    background-image: url(../assets/images/banner_AboutUs/wallpaper_01.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     color: white;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
+    height: 25em;
+    
 }
 
 
@@ -80,9 +82,14 @@ footer {
         }
 
 
+#bordoBot {
+    border-bottom: 2px solid #bf9a5c;
+}
 
+#giallo {
+    color: #ffa000;
+}
 /*----------------------ABOUT US--------------------*/
-
 .MainColor_AboutUs {
     width: 100vw;
     min-height: 100vh;
@@ -95,7 +102,7 @@ footer {
     position: relative;
     overflow: hidden;
     background-image: url('../assets/images/banner_AboutUs/wallpaper_02.jpg');
-    background-size: cover; 
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
