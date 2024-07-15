@@ -65,15 +65,13 @@ namespace EpicockX.Services
         {
             try
             {
-                using (
-                    SqlConnection conn = new SqlConnection(
-                        _config.GetConnectionString("DefaultConnection")
-                    )
-                )
+                Product product = null;
+                using (SqlConnection conn = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
                 {
                     conn.Open();
                     const string SELECT_BY_ID_COMMAND =
-                        "SELECT * FROM Products WHERE ProductId = @ProductId";
+                        "SELECT p.ProductId, p.ProductName, p.ProductDescription, p.ProductQuantity, p.ProductPrice, p.ProductCategory, p.ProductBrand, COALESCE(STRING_AGG(pi.ProductImageUrl, '?'),'') AS ProductImages FROM Products AS p LEFT JOIN ProductImages AS pi ON p.ProductId = pi.ProductId WHERE p.ProductId = @ProductId GROUP BY p.ProductId, p.ProductName, p.ProductDescription, p.ProductQuantity, p.ProductPrice, p.ProductCategory, p.ProductBrand";
+
                     using (SqlCommand cmd = new SqlCommand(SELECT_BY_ID_COMMAND, conn))
                     {
                         cmd.Parameters.AddWithValue("@ProductId", id);
@@ -81,7 +79,7 @@ namespace EpicockX.Services
                         {
                             if (reader.Read())
                             {
-                                Product product = new Product();
+                                product = new Product();
                                 product.ProductId = reader.GetInt32(0);
                                 product.ProductName = reader.GetString(1);
                                 product.ProductDescription = reader.GetString(2);
@@ -89,18 +87,23 @@ namespace EpicockX.Services
                                 product.ProductPrice = reader.GetDecimal(4);
                                 product.ProductCategory = reader.GetString(5);
                                 product.ProductBrand = reader.GetString(6);
-                                return product;
+                                product.ProductImage = reader.GetString(7);
+                                product.ProductImages =
+                                    String.IsNullOrEmpty(product.ProductImage) == false
+                                        ? product.ProductImage.Split('?').ToList()
+                                        : new List<string>();
                             }
                         }
                     }
                 }
-                return null;
+                return product;
             }
             catch (Exception ex)
             {
                 throw new Exception("Errore nel recupero del prodotto", ex);
             }
         }
+
 
         public void AddProduct(Product product)
         {

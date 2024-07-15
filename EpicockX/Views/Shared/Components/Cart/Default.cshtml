@@ -14,18 +14,21 @@
             <li class="py-2 border-bottom">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center justify-content-center">
+                        @if (i.ProductImages.Any())
+                        {
+                            <img src="@i.ProductImages.FirstOrDefault()" alt="Immagine prodotto" style="width: 50px; height: auto;">
+                        }
                         <div class="ms-2 ">
                             <p class="font-weight-bold text-gray-300 mb-0">Nome: @i.ProductName</p>
                             <p class="font-weight-bold text-gray-300 mb-0">
                                 Quantita': @i.ProductQuantity
                             </p>
-                            
+
                         </div>
                     </div>
                     <p class="font-weight-bold">Prezzo: @i.TotalPrice</p>
                 </div>
             </li>
-            <!-- Aggiungi altri articoli qui -->
         </ul>
     }
     <div class="d-flex flex-column  align-items-center mt-4">
@@ -40,3 +43,4 @@ else
 {
     <div>Il carrello è vuoto.</div>
 }
+

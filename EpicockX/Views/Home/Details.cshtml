@@ -107,18 +107,34 @@
 
 
 @section Scripts {
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        $(document).ready(function () {
+            $('#productCarousel').carousel({
+                interval: 2000
+            });
+            $('.carousel').css('transition-duration', '0.5s');
+
+            $('.carousel-control-prev').click(function () {
+                $('#productCarousel').carousel('prev');
+            });
+
+            $('.carousel-control-next').click(function () {
+                $('#productCarousel').carousel('next');
+            });
+
             let addToCartBtn = document.getElementById('addToCartBtn');
             addToCartBtn.addEventListener('click', function (e) {
                 e.preventDefault();
 
-                let idProdotto = $(this).data('id'); 
+                let idProdotto = $(this).data('id');
                 let quantity = $('#quantityInput').val();
                 let url = '@Url.Action("AddToCart", "Cart")';
                 console.log(url + '?id=' + idProdotto + '&quantity=' + quantity + '&returnUrl=' + '@Context.Request.Path');
                 window.location.href = url + '?id=' + idProdotto + '&quantity=' + quantity + '&returnUrl=' + '@Context.Request.Path';
-            }); 
+            });
         });
     </script>
 }

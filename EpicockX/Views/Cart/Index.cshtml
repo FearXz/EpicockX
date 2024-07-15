@@ -17,30 +17,34 @@
                 @foreach (var product in Model)
                 {
                     <div class="rounded border border-gray-200 bg-white p-4 shadow-sm mb-4">
-                        <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
-                            <div class="flex items-center justify-between md:order-3 md:justify-end">
-                                <div class="flex items-center">
-                                    <img src="@product.ProductImages.FirstOrDefault()" alt="Alternate Text" />
-                                </div>
-                                <div class="text-end md:order-4 md:w-32">
-                                    <p class="text-base fw-bold">@product.ProductPrice.ToString("C")</p>
-                                </div>
+                        <div class="row">
+                            <!-- Colonna Immagine -->
+                            <div class="col-md-6 d-flex justify-content-center">
+                                <img src="@product.ProductImages.FirstOrDefault()" alt="Immagine prodotto" class="img-fluid w-100 max-h-150" />
                             </div>
-                            <div class="w-100 min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                                <div class="d-flex justify-content-between">
-                                <p class="text-base fw-medium text-decoration-none hover-underline">@product.ProductName</p>
+                            <!-- Colonna Nome e Descrizione -->
+                            
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6"> 
+                                <p class="text-base fw-medium">@product.ProductName</p>
+                                <p class="text-sm">@product.ProductDescription</p>
+                                    </div>
+                            
+                            <!-- Colonna Quantità e Prezzo -->
+                            <div class="col-md-6">
                                 <p>Quantità: @product.ProductQuantity</p>
+                                <p class="text-base fw-bold">@product.ProductPrice.ToString("C")</p>
+                                    </div>
+                            
+                            <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-productId="@product.ProductId" asp-route-returnUrl="@Context.Request.Path" asp-route-quantity="1" class="btn btn-danger mt-2">Rimuovi dal carrello</a>
                                 </div>
-                                <p class="text-base fw-medium text-decoration-none hover-underline">@product.ProductDescription</p>
-
-                                <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-productId="@product.ProductId" asp-route-returnUrl="@Context.Request.Path" asp-route-quantity="1" class="btn btn-danger mt-2">Rimuovi dal carrello</a>
-
-
                             </div>
                         </div>
                     </div>
                 }
             </div>
+
 
             <div class="col mt-6">
                 <div class="rounded border border-gray-200 bg-white p-4 shadow-sm sm:p-6">
