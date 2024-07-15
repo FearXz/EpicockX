@@ -318,30 +318,33 @@ h2 {
     white-space: nowrap;
 }
 
-/*------------------------------------------*/
-#promoModal.active {
-    display: flex;
+/*-----------------success-------------------------*/
+
+
+.toast-top-right-custom {
+    top: 90px;
+    right: 12px;
 }
 
-#alert {
-    
-    background-color: #bf9a5c;
-    color: white;
-    font-weight: bold;
-    font-family: 'Roboto', sans-serif;
-
-
+/*-----------------catalog-------------------------*/
+.mainColor {
+    background-color: #1D1E22;
 }
 
-#scontoHd {
-    color: white;
-    font-weight: bold;
-    font-family: 'Roboto', sans-serif;
-    background-color: #bf9a5c;
+li {
+    list-style-type: none;
 }
 
-#video {
-    background-color : black; 
-    margin-bottom: -23px;
+.card-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
 }
 
+.descrizione {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

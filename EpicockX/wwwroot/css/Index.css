@@ -4,6 +4,30 @@
     background-position: center;
 }
 
+/* Modale */
+
+#promoModal.active {
+    display: flex;
+}
+
+#alert {
+    background-color: #bf9a5c;
+    color: white;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+}
+
+#scontoHd {
+    color: white;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    background-color: #bf9a5c;
+}
+
+#video {
+    background-color: black;
+    margin-bottom: -23px;
+}
 
 /* Card Index */
 
