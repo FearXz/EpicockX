@@ -12,70 +12,35 @@
         color: #3b71ca !important;
     }
 
-        .icon-hover:hover i {
+    .icon-hover:hover i {
             color: #3b71ca !important;
-        }
+    }
+
+    .productImg {
+        cursor: pointer;
+    }
 </style>
 
-<div class="container py-10 ">
-    <div class="card custom-card w-50 mx-auto  border-0">
-        <!-- Inizio Carosello -->
-        <div id="productCarousel" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                @foreach (var image in Model.ProductImages)
-                {
-                    <div class="carousel-item @(image == Model.ProductImages.First() ? "active" : "")">
-                        <img src="@image" class="d-block w-100 carousel-img" alt="...">
-                    </div>
-                }
-            </div>
-            <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Precedente</span>
-            </a>
-            <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Successivo</span>
-            </a>
-        </div>
-        <!-- Fine Carosello -->
-        <div class="card-body text-center bg-dark text-white p-4">
-            <h5 class="card-title fs-4">@Model.ProductName</h5>
-            <p class="card-text">@Model.ProductDescription</p>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item border-0">Categoria: @Model.ProductCategory</li>
-                <li class="list-group-item border-0">Marca: @Model.ProductBrand</li>
-                <li class="list-group-item border-0">
-                    Quantità:
-                    <input id="quantityInput" type="number" class="form-control" value="1" min="1" max="10">
-                </li>
-                <li class="list-group-item border-0">Prezzo: @Model.ProductPrice.ToString("C")</li>
-            </ul>
-            <button id="addToCartBtn" data-id="@Model.ProductId" class="btn btn-primary mt-2">Aggiungi al carrello</button>
-        </div>
-    </div>
-</div>
-
 <!-- content -->
-<section class="py-5">
-    <div class="container">
+    <div class="container py-5">
         <div class="row gx-5">
             <aside class="col-lg-6">
                 <div class="border rounded-4 mb-3 d-flex justify-content-center">
                     <div>
-                        <img src="@Model.ProductImages.First()"
+                        <img id="productMainImg"
+                             src="@Model.ProductImages.First()"
                              style="max-width: 100%; max-height: 100vh; margin: auto"
                              class="rounded-4 fit"
                              alt="...">
                     </div>
                 </div>
-                <div class="d-flex justify-content-center mb-3">
+                <div class="row row-cols-12 justify-content-center mb-3">
                     @foreach (var image in Model.ProductImages)
                     {
-                        <div class="carousel-item">
+                        <div class="col m-1">
                             <img 
                                 src="@image"
-                                class="rounded-2"
+                                class="productImg rounded-2"
                                 width="60"
                                 height="60"
                                 alt="...">
@@ -83,8 +48,6 @@
                     }
 
                 </div>
-                <!-- thumbs-wrap.// -->
-                <!-- gallery-wrap .end// -->
             </aside>
             <main class="col-lg-6">
                 <div class="ps-lg-3">
@@ -121,7 +84,6 @@
             </main>
         </div>
     </div>
-</section>
 
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -151,6 +113,16 @@
                 let url = '@Url.Action("AddToCart", "Cart")';
                 console.log(url + '?id=' + idProdotto + '&quantity=' + quantity + '&returnUrl=' + '@Context.Request.Path');
                 window.location.href = url + '?id=' + idProdotto + '&quantity=' + quantity + '&returnUrl=' + '@Context.Request.Path';
+            });
+        });
+
+        $(document).ready(function () {
+            // Gestisce il click su tutte le immagini con classe 'productImg'
+            $('.productImg').click(function () {
+                // Prende l'attributo 'src' dell'immagine cliccata
+                var newSrc = $(this).attr('src');
+                // Assegna il nuovo 'src' all'immagine principale con id 'productMainImg'
+                $('#productMainImg').attr('src', newSrc);
             });
         });
     </script>
