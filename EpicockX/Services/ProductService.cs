@@ -27,7 +27,7 @@ namespace EpicockX.Services
                 {
                     conn.Open();
                     const string SELECT_ALL_COMMAND =
-                        "SELECT p.ProductId, p.ProductName, p.ProductDescription, p.ProductQuantity, p.ProductPrice, p.ProductCategory, p.ProductBrand, COALESCE(STRING_AGG(pi.ProductImageUrl, '?'),'') AS ProductImages FROM Products AS p LEFT JOIN ProductImages AS pi ON p.ProductId = pi.ProductId GROUP BY p.ProductId, p.ProductName, p.ProductDescription, p.ProductQuantity, p.ProductPrice, p.ProductCategory, p.ProductBrand";
+                    "SELECT p.ProductId, p.ProductName, p.ProductDescription, p.ProductQuantity, p.ProductPrice, p.ProductCategory, p.ProductBrand, COALESCE(STRING_AGG(pi.ProductImageUrl, '?'),'') AS ProductImages FROM Products AS p LEFT JOIN ProductImages AS pi ON p.ProductId = pi.ProductId GROUP BY p.ProductId, p.ProductName, p.ProductDescription, p.ProductQuantity, p.ProductPrice, p.ProductCategory, p.ProductBrand ORDER BY p.ProductName ASC";
 
                     using (SqlCommand cmd = new SqlCommand(SELECT_ALL_COMMAND, conn))
                     {

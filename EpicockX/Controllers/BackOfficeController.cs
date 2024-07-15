@@ -77,6 +77,16 @@ namespace EpicockX.Controllers
         [HttpPost]
         public IActionResult DeleteProduct(int id)
         {
+            // Ottieni tutte le immagini associate al prodotto
+            var images = _imageSvc.GetImages().Where(img => img.ProductId == id).ToList();
+
+            // Elimina tutte le immagini trovate
+            foreach (var image in images)
+            {
+                _imageSvc.DeleteImage(image.ProductImageId);
+            }
+
+            // Elimina il prodotto
             _productSvc.DeleteProduct(id);
             return RedirectToAction("Index");
         }
@@ -93,6 +103,13 @@ namespace EpicockX.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult GetProductImages(int productId)
+        {
+            var images = _imageSvc.GetImages().Where(img => img.ProductId == productId).ToList();
+            return Json(images);
+        }
+
         [HttpPost]
         public IActionResult DeleteProductImage(int id)
         {
@@ -100,11 +117,6 @@ namespace EpicockX.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
-        public IActionResult GetProductImages(int productId)
-        {
-            var images = _imageSvc.GetImages().Where(img => img.ProductId == productId).ToList();
-            return Json(images);
-        }
+
     }
 }
