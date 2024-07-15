@@ -1,5 +1,7 @@
 ﻿using EpicockX.Models;
+using Microsoft.Build.Globbing;
 using Microsoft.Data.SqlClient;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace EpicockX.Services
 {
@@ -132,6 +134,39 @@ namespace EpicockX.Services
                 throw new Exception("Errore nell'aggiunta dell'immagine del prodotto", ex);
             }
         }
+
+        public void UpdateImage(int productId, List<IFormFile> newImages)
+        {
+            try
+            {
+                // Rimuovi tutte le immagini esistenti per questo prodotto
+                var existingImages = GetImages().Where(img => img.ProductId == productId).ToList();
+                foreach (var image in existingImages)
+                {
+                    DeleteImage(image.ProductImageId);
+                }
+
+                // Aggiungi le nuove immagini
+                foreach (var imageFile in newImages)
+                {
+                    if (imageFile.Length > 0)
+                    {
+                        // Crea un nuovo oggetto ProductImage per ogni immagine
+                        var productImage = new ProductImage
+                        {
+                            ProductId = productId,
+                            ImageFile = imageFile
+                        };
+                        AddImage(productImage);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Errore durante l'aggiornamento delle immagini del prodotto.", ex);
+            }
+        }
+
 
         public void DeleteImage(int id)
         {

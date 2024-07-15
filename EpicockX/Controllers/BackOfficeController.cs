@@ -61,7 +61,7 @@ namespace EpicockX.Controllers
 
 
         [HttpPost]
-        public IActionResult UpdateProduct(BackOfficeIndexViewModel viewModel)
+        public IActionResult UpdateProduct(BackOfficeIndexViewModel viewModel, [FromForm] List<IFormFile> productImages)
         {
             if (!ModelState.IsValid)
             {
@@ -70,6 +70,7 @@ namespace EpicockX.Controllers
             }
 
             _productSvc.UpdateProduct(viewModel.NewProduct);
+            _imageSvc.UpdateImage(viewModel.NewProduct.ProductId, productImages);
             return RedirectToAction("Index");
         }
 
@@ -97,6 +98,13 @@ namespace EpicockX.Controllers
         {
             _imageSvc.DeleteImage(id);
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult GetProductImages(int productId)
+        {
+            var images = _imageSvc.GetImages().Where(img => img.ProductId == productId).ToList();
+            return Json(images);
         }
     }
 }

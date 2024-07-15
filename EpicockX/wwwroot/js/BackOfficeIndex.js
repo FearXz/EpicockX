@@ -68,6 +68,26 @@ document.addEventListener("DOMContentLoaded", function () {
     document
       .getElementById("collapseThree")
       .scrollIntoView({ behavior: "smooth", block: "start" });
+
+    loadProductImages(id);
+  }
+
+  function loadProductImages(productId) {
+    $.ajax({
+      url: "/BackOffice/GetProductImages",
+      data: { productId: productId },
+      success: function (data) {
+        var imagesContainer = $("#imagesContainer");
+        imagesContainer.empty();
+        data.forEach(function (img) {
+          imagesContainer.append(
+            '<img src="' +
+              img.productImageUrl +
+              '" style="width: 100px; height: 100px;" />'
+          );
+        });
+      },
+    });
   }
 
   function confirmDelete(productId) {

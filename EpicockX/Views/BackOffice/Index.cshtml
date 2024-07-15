@@ -135,7 +135,7 @@
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#updateProduct">
             <div class="accordion-body">
-                @using (Html.BeginForm("UpdateProduct", "BackOffice", FormMethod.Post, new { id="updateProductForm" }))
+                @using (Html.BeginForm("UpdateProduct", "BackOffice", FormMethod.Post, new { id = "updateProductForm", enctype = "multipart/form-data" }))
                 {
                     @Html.HiddenFor(model => model.NewProduct.ProductId, new { id = "ProductId" })
                     @Html.Hidden("FormMode", "Edit", new { id = "FormMode" })
@@ -162,6 +162,14 @@
                     <div class="mb-4">
                         @Html.LabelFor(model => model.NewProduct.ProductBrand, new { @class = "block text-sm font-medium text-gray-700" })
                         @Html.TextBoxFor(model => model.NewProduct.ProductBrand, new { @class = "form-control", @id = "ProductBrand", @required = "required" })
+                    </div>
+                    <div id="imageUploadContainer">
+                        <label for="productImages">Carica immagini:</label>
+                        <input type="file" name="productImages" class="product-image-input" multiple />
+
+                    </div>
+                    <button type="button" id="addMoreImages">+</button>
+                    <div id="imagesContainer">
                     </div>
                     <div>
                         <input type="submit" id="formButton" value="Modifica" class="btn btn-primary" />
